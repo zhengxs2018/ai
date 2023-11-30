@@ -1,0 +1,40 @@
+.DS_store
+.history
+
+node_modules
+
+# local env files
+.env.local
+.env.*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor directories and files
+.idea
+# .vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Wechaty Cache
+*.memory-card.json
+
+# build artifacts
+dist
+dist-*
+temp/
+# doc/
+
+.env
+.cache
+*.tsbuildinfo
+*.sqlite
+
+yarn.lock
+package-lock.json

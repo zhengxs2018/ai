@@ -1,0 +1,45 @@
+version: "0.2"
+ignorePaths:
+  - archive
+  - dist
+  - node_modules
+dictionaries:
+  - en_US
+  - softwareTerms
+  - bash
+  - node
+  - npm
+  - html
+  - css
+  - typescript
+  - filetypes
+words:
+  - aistudio
+  - claudeai
+  - deepl
+  - dingtalk
+  - erniebot
+  - GPTAPI
+  - hotlist
+  - jiti
+  - keyv
+  - langchain
+  - languagedetect
+  - llmapi
+  - llms
+  - moyu
+  - msgtype
+  - openai
+  - preinstall
+  - qianfan
+  - qwen
+  - qwenai
+  - tiktoken
+  - trivago
+  - vuepress
+  - wechat
+  - wechaty
+  - yiyan
+  - yiyian
+ignoreWords:
+  - zhengxs

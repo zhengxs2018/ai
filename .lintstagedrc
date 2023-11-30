@@ -1,0 +1,5 @@
+{
+  "*.ts": "eslint",
+  "*.json": "prettier --check",
+  "*.md": "prettier --check"
+}

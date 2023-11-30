@@ -1,0 +1,89 @@
+{
+  "name": "@zhengxs/ai",
+  "version": "0.1.0-alpha.0",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "description": "llm tools",
+  "keywords": [
+    "ai",
+    "llm",
+    "qwen",
+    "ernie-bot"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs",
+      "types": "./dist-types/index.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "types": "./dist-types/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist-types/index.d.ts",
+        "./dist-types/*"
+      ]
+    }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "files": [
+    "dist",
+    "dist-types"
+  ],
+  "scripts": {
+    "prepare": "husky install",
+    "task": "node --no-warnings -r tsconfig-paths/register -r dotenv/config -r jiti/register",
+    "inspect": "node --no-warnings --inspect -r tsconfig-paths/register -r dotenv/config -r jiti/register",
+    "build": "trash dist dist-types && tsc --noEmit && pnpm lint && vite build",
+    "lint": "eslint . --ext .ts,.cjs",
+    "lint:fix": "eslint . --ext .ts,.cjs --fix --fix-type [problem,suggestion]",
+    "fmt": "prettier --write \"**/*.{ts,json,,md}\" --log-level warn"
+  },
+  "packageManager": "pnpm@7.0.0",
+  "dependencies": {
+    "openai": "^4.20.1"
+  },
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.2.1",
+    "@types/node": "^20.9.0",
+    "@typescript-eslint/eslint-plugin": "^6.10.0",
+    "@typescript-eslint/parser": "^6.10.0",
+    "dotenv": "^16.3.1",
+    "eslint": "^8.53.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-define-config": "^1.24.1",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-tsdoc": "^0.2.17",
+    "husky": "^8.0.3",
+    "jiti": "^1.21.0",
+    "lint-staged": "^15.0.2",
+    "mkdirp": "^3.0.1",
+    "prettier": "^3.0.3",
+    "trash-cli": "^5.0.0",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "~5.0.4",
+    "vite": "^4.5.0",
+    "vite-plugin-checker": "^0.6.2",
+    "vite-plugin-dts": "^3.6.3",
+    "vite-plugin-externalize-deps": "^0.7.0"
+  },
+  "homepage": "https://github.com/zhengxs2018/ai#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zhengxs2018/ai"
+  },
+  "bugs": {
+    "url": "https://github.com/zhengxs2018/ai/issues"
+  },
+  "author": "zhengxs2018 <zhengxs2018@gmail.com>",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "license": "MIT"
+}
