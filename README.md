@@ -24,12 +24,12 @@ $ yarn add @zhengxs/ai
 ```ts
 import { ErnieAI } from '@zhengxs/ai';
 
-const ernie = new ErnieAI({
+const ai = new ErnieAI({
   apiKey: 'My API Key', // defaults to process.env["EB_API_KEY"]
 });
 
 async function main() {
-  const chatCompletion = await ernie.chat.completions.create({
+  const chatCompletion = await ai.chat.completions.create({
     model: 'ernie-bot-turbo',
     messages: [{ role: 'user', content: 'Say this is a test' }],
   });
@@ -43,10 +43,10 @@ main();
 ```ts
 import { ErnieAI } from '@zhengxs/ai';
 
-const ernie = new ErnieAI();
+const ai = new ErnieAI();
 
 async function main() {
-  const stream = await ernie.chat.completions.create({
+  const stream = await ai.chat.completions.create({
     model: 'ernie-bot-turbo',
     messages: [{ role: 'user', content: 'Say this is a test' }],
     stream: true,
@@ -67,12 +67,12 @@ main();
 ```ts
 import { QWenAI } from '@zhengxs/ai';
 
-const ernie = new QWenAI({
+const ai = new QWenAI({
   apiKey: 'My API Key', // defaults to process.env["QWEN_API_KEY"]
 });
 
 async function main() {
-  const chatCompletion = await ernie.chat.completions.create({
+  const chatCompletion = await ai.chat.completions.create({
     model: 'qwen-turbo',
     messages: [{ role: 'user', content: 'Say this is a test' }],
   });
