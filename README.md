@@ -83,16 +83,18 @@ main();
 
 ## 待办
 
-- [x] 文心一言 [百度飞浆](https://aistudio.baidu.com/cooperate/yiyan)
+- [x] 百度文心一言大模型 [百度飞浆分发](https://aistudio.baidu.com/cooperate/yiyan)
   - [x] ChatCompletion
   - [x] Embedding
-- [x] 通义千问
+- [x] 阿里通义千问大模型
   - [x] ChatCompletion
   - [ ] Embedding
-- [x] 讯飞星火
+- [x] 讯飞星火认知大模型
   - [x] ChatCompletion
   - [ ] Embedding
   - [ ] Images
+- [x] 腾讯混元大模型
+  - [x] ChatCompletion
 
 ## License
 
