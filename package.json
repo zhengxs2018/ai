@@ -1,6 +1,6 @@
 {
   "name": "@zhengxs/ai",
-  "version": "0.1.0-alpha.1",
+  "version": "0.1.0-alpha.2",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "description": "llm tools",
