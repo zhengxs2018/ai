@@ -2,8 +2,9 @@ import OpenAI from 'openai';
 
 import ErnieAI from './ernie';
 import QWenAI from './qwen';
+import SparkAI from './spark';
 
-export { ErnieAI, QWenAI, OpenAI };
+export { ErnieAI, QWenAI, OpenAI, SparkAI };
 
 export {
   OpenAIError,

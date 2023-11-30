@@ -1,6 +1,6 @@
 {
   "name": "@zhengxs/ai",
-  "version": "0.1.0-alpha.0",
+  "version": "0.1.0-alpha.1",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "description": "llm tools",
@@ -46,11 +46,13 @@
   },
   "packageManager": "pnpm@7.0.0",
   "dependencies": {
-    "openai": "^4.20.1"
+    "openai": "^4.20.1",
+    "ws": "^8.14.2"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.2.1",
     "@types/node": "^20.9.0",
+    "@types/ws": "^8.5.10",
     "@typescript-eslint/eslint-plugin": "^6.10.0",
     "@typescript-eslint/parser": "^6.10.0",
     "dotenv": "^16.3.1",

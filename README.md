@@ -1,5 +1,7 @@
 # @zhengxs/ai
 
+[![Typescript](https://img.shields.io/badge/lang-typescript-informational?style=flat-square)](https://www.typescriptlang.org)[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)[![npm package](https://img.shields.io/npm/v/@zhengxs/ai.svg?style=flat-square)](https://www.npmjs.com/package/@zhengxs/ai)[![npm downloads](https://img.shields.io/npm/dt/@zhengxs/ai.svg?style=flat-square)](https://www.npmjs.com/package/@zhengxs/ai)![License](https://img.shields.io/npm/l/@zhengxs/ai.svg?style=flat-square)
+
 > 开发中
 
 集成 文心一言，通义千问 等国内大模型 API，并且适配为 OpenAI 的输入与输出。
@@ -87,6 +89,10 @@ main();
 - [x] 通义千问
   - [x] ChatCompletion
   - [ ] Embedding
+- [x] 讯飞星火
+  - [x] ChatCompletion
+  - [ ] Embedding
+  - [ ] Images
 
 ## License
 
