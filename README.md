@@ -95,6 +95,13 @@ main();
   - [ ] Images
 - [x] 腾讯混元大模型
   - [x] ChatCompletion
+- [x] [ImagineArt](https://platform.imagine.art/api-reference)
+  - [x] Images
+    - [ ] createVariation
+    - [x] edit
+    - [x] generate
+    - [x] upscale
+    - [ ] restoration
 
 ## License
 

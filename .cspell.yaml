@@ -21,24 +21,32 @@ words:
   - erniebot
   - GPTAPI
   - hotlist
+  - hunyuan
+  - inpaint
+  - inpainted
   - jiti
   - keyv
   - langchain
   - languagedetect
+  - lineart
   - llmapi
   - llms
   - moyu
   - msgtype
   - openai
+  - openpose
   - preinstall
   - qianfan
   - qwen
   - qwenai
+  - sdxl
   - tiktoken
   - trivago
   - vuepress
+  - vyro
   - wechat
   - wechaty
+  - Weightage
   - yiyan
   - yiyian
 ignoreWords:
