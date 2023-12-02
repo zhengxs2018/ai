@@ -83,18 +83,21 @@ main();
 
 ## 待办
 
-- [x] 百度文心一言大模型 [百度飞浆分发](https://aistudio.baidu.com/cooperate/yiyan)
+- [x] 百度文心一言大模型 [百度飞桨分发](https://aistudio.baidu.com/cooperate/yiyan)
   - [x] ChatCompletion
   - [x] Embedding
-- [x] 阿里通义千问大模型
+- [x] [阿里通义千问大模型](https://tongyi.aliyun.com/)
   - [x] ChatCompletion
   - [ ] Embedding
-- [x] 讯飞星火认知大模型
+- [x] [讯飞星火认知大模型](https://xinghuo.xfyun.cn/)
   - [x] ChatCompletion
   - [ ] Embedding
   - [ ] Images
-- [x] 腾讯混元大模型
+- [x] [腾讯混元大模型](https://hunyuan.tencent.com/)
   - [x] ChatCompletion
+- [x] [Minimax](https://api.minimax.chat/)
+  - [x] ChatCompletion
+  - [x] Embedding
 - [x] [ImagineArt](https://platform.imagine.art/api-reference)
   - [x] Images
     - [ ] createVariation
