@@ -1,13 +1,7 @@
 import { createHmac } from 'node:crypto';
 import type { Agent } from 'node:http';
 
-import {
-  APIClient,
-  type DefaultQuery,
-  type Fetch,
-  type FinalRequestOptions,
-  type Headers,
-} from 'openai/core';
+import { APIClient, type DefaultQuery, type Fetch, type FinalRequestOptions, type Headers } from 'openai/core';
 
 import * as API from './resources';
 
@@ -110,6 +104,13 @@ export class HunYuanAI extends APIClient {
     const hash = createHmac('sha1', this.secretKey);
     return hash.update(Buffer.from(data, 'utf8')).digest('base64');
   }
+}
+
+export namespace HunYuanAI {
+  export type ChatModel = API.ChatModel;
+  export type ChatCompletionCreateParams = API.ChatCompletionCreateParams;
+  export type ChatCompletionCreateParamsStreaming = API.ChatCompletionCreateParamsStreaming;
+  export type ChatCompletionCreateParamsNonStreaming = API.ChatCompletionCreateParamsNonStreaming;
 }
 
 export default HunYuanAI;

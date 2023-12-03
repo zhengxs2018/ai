@@ -1,11 +1,6 @@
 import { createHmac } from 'node:crypto';
 
-import {
-  APIClient,
-  type DefaultQuery,
-  type Fetch,
-  type Headers,
-} from 'openai/core';
+import { APIClient, type DefaultQuery, type Fetch, type Headers } from 'openai/core';
 
 import * as API from './resources';
 
@@ -105,17 +100,7 @@ export class SparkAI extends APIClient {
    *
    * See https://www.xfyun.cn/doc/spark/general_url_authentication.html
    */
-  generateAuthorization({
-    method,
-    host,
-    path,
-    date,
-  }: {
-    method: string;
-    host: string;
-    path: string;
-    date: string;
-  }) {
+  generateAuthorization({ method, host, path, date }: { method: string; host: string; path: string; date: string }) {
     // 生成签名原文
     const rawSignature = `host: ${host}\ndate: ${date}\n${method} ${path} HTTP/1.1`;
 
@@ -132,6 +117,14 @@ export class SparkAI extends APIClient {
     sha256Hmac.update(data);
     return sha256Hmac.digest('base64');
   }
+}
+
+export namespace SparkAI {
+  export type Chat = API.Chat;
+  export type ChatModel = API.ChatModel;
+  export type ChatCompletionCreateParams = API.ChatCompletionCreateParams;
+  export type ChatCompletionCreateParamsNonStreaming = API.ChatCompletionCreateParamsNonStreaming;
+  export type ChatCompletionCreateParamsStreaming = API.ChatCompletionCreateParamsStreaming;
 }
 
 export default SparkAI;

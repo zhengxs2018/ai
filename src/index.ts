@@ -1,13 +1,15 @@
 import OpenAI from 'openai';
 
-import ErnieAI from './ernie';
-import HunYuanAI from './hunyuan';
-import MinimaxAI from './minimax';
-import QWenAI from './qwen';
-import SparkAI from './spark';
-import VYroAI from './vyro';
+import ErnieAI, { ErnieAIOptions } from './ernie';
+import HunYuanAI, { HunYuanAIOptions } from './hunyuan';
+import MinimaxAI, { MinimaxAIOptions } from './minimax';
+import QWenAI, { QWenAIOptions } from './qwen';
+import SparkAI, { SparkAIOptions } from './spark';
+import VYroAI, { VYroAIOptions } from './vyro';
 
 export { ErnieAI, HunYuanAI, MinimaxAI, OpenAI, QWenAI, SparkAI, VYroAI };
+
+export type { ErnieAIOptions, HunYuanAIOptions, MinimaxAIOptions, QWenAIOptions, SparkAIOptions, VYroAIOptions };
 
 export {
   OpenAIError,
