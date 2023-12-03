@@ -71,7 +71,7 @@ export class MinimaxAI extends APIClient {
   }
 }
 
-export namespace QWenAI {
+export namespace MinimaxAI {
   export type Chat = API.Chat;
   export type ChatModel = API.ChatModel;
   export type ChatCompletionCreateParams = API.ChatCompletionCreateParams;
