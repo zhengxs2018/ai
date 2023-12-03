@@ -1,11 +1,6 @@
 import type { Agent } from 'node:http';
 
-import {
-  APIClient,
-  type DefaultQuery,
-  type Fetch,
-  type Headers,
-} from 'openai/core';
+import { APIClient, type DefaultQuery, type Fetch, type Headers } from 'openai/core';
 
 import * as API from './resources';
 

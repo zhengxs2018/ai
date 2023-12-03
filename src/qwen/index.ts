@@ -1,12 +1,6 @@
 import type { Agent } from 'node:http';
 
-import {
-  APIClient,
-  type DefaultQuery,
-  type Fetch,
-  type FinalRequestOptions,
-  type Headers,
-} from 'openai/core';
+import { APIClient, type DefaultQuery, type Fetch, type FinalRequestOptions, type Headers } from 'openai/core';
 
 import * as API from './resources';
 
@@ -85,10 +79,8 @@ export namespace QWenAI {
   export type Chat = API.Chat;
   export type ChatModel = API.ChatModel;
   export type ChatCompletionCreateParams = API.ChatCompletionCreateParams;
-  export type ChatCompletionCreateParamsNonStreaming =
-    API.ChatCompletionCreateParamsNonStreaming;
-  export type ChatCompletionCreateParamsStreaming =
-    API.ChatCompletionCreateParamsStreaming;
+  export type ChatCompletionCreateParamsNonStreaming = API.ChatCompletionCreateParamsNonStreaming;
+  export type ChatCompletionCreateParamsStreaming = API.ChatCompletionCreateParamsStreaming;
 }
 
 export default QWenAI;

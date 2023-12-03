@@ -8,10 +8,7 @@ export class Images extends APIResource {
   /**
    * See https://www.xfyun.cn/doc/spark/ImageGeneration.html
    */
-  async generate(
-    params: OpenAI.ImageGenerateParams,
-    options?: RequestOptions,
-  ): Promise<OpenAI.ImagesResponse> {
+  async generate(params: OpenAI.ImageGenerateParams, options?: RequestOptions): Promise<OpenAI.ImagesResponse> {
     const { prompt, user } = params;
 
     const body: ImagesAPI.ImageGenerateParams = {
@@ -33,10 +30,7 @@ export class Images extends APIResource {
       },
     };
 
-    const url = this._client.generateAuthorizationURL(
-      'https://spark-api.cn-huabei-1.xf-yun.com/v2.1/tti',
-      'POST',
-    );
+    const url = this._client.generateAuthorizationURL('https://spark-api.cn-huabei-1.xf-yun.com/v2.1/tti', 'POST');
 
     const response: Response = await this._client.post(url, {
       ...options,

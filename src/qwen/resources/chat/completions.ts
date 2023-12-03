@@ -11,19 +11,13 @@ export class Completions extends APIResource {
    *
    * See https://help.aliyun.com/zh/dashscope/developer-reference/api-details
    */
-  create(
-    body: ChatCompletionCreateParamsNonStreaming,
-    options?: OpenAI.RequestOptions,
-  ): Promise<OpenAI.ChatCompletion>;
+  create(body: ChatCompletionCreateParamsNonStreaming, options?: OpenAI.RequestOptions): Promise<OpenAI.ChatCompletion>;
   create(
     body: ChatCompletionCreateParamsStreaming,
     options?: OpenAI.RequestOptions,
   ): Promise<Stream<OpenAI.ChatCompletionChunk>>;
 
-  async create(
-    params: ChatCompletionCreateParams,
-    options?: OpenAI.RequestOptions,
-  ) {
+  async create(params: ChatCompletionCreateParams, options?: OpenAI.RequestOptions) {
     const headers: Headers = {
       ...options?.headers,
     };
@@ -34,19 +28,16 @@ export class Completions extends APIResource {
 
     const body = Completions.buildCreateParams(params);
 
-    const response: Response = await this._client.post(
-      '/services/aigc/text-generation/generation',
-      {
-        ...options,
-        // @ts-expect-error 类型冲突？
-        body,
-        headers,
-        // 通义千问的响应内容被包裹了一层，需要解构并转换为 OpenAI 的格式
-        // 设置 __binaryResponse 为 true， 是为了让 client 返回原始的 response
-        stream: false,
-        __binaryResponse: true,
-      },
-    );
+    const response: Response = await this._client.post('/services/aigc/text-generation/generation', {
+      ...options,
+      // @ts-expect-error 类型冲突？
+      body,
+      headers,
+      // 通义千问的响应内容被包裹了一层，需要解构并转换为 OpenAI 的格式
+      // 设置 __binaryResponse 为 true， 是为了让 client 返回原始的 response
+      stream: false,
+      __binaryResponse: true,
+    });
 
     if (params.stream) {
       const controller = new AbortController();
@@ -61,9 +52,7 @@ export class Completions extends APIResource {
     return Completions.fromResponse(body.model, await response.json());
   }
 
-  static buildCreateParams(
-    params: ChatCompletionCreateParams,
-  ): ChatCompletions.ChatCompletionCreateParams {
+  static buildCreateParams(params: ChatCompletionCreateParams): ChatCompletions.ChatCompletionCreateParams {
     const { model, messages, presence_penalty, ...rest } = params;
 
     const data: ChatCompletions.ChatCompletionCreateParams = {
@@ -85,10 +74,7 @@ export class Completions extends APIResource {
     return data;
   }
 
-  static fromResponse(
-    model: string,
-    data: ChatCompletions.ChatCompletion,
-  ): OpenAI.ChatCompletion {
+  static fromResponse(model: string, data: ChatCompletions.ChatCompletion): OpenAI.ChatCompletion {
     Completions.assert(data);
 
     const { output, usage } = data;
@@ -124,9 +110,7 @@ export class Completions extends APIResource {
     let consumed = false;
     const decoder = new SSEDecoder();
 
-    function transform(
-      data: ChatCompletions.ChatCompletionChunk,
-    ): OpenAI.ChatCompletionChunk {
+    function transform(data: ChatCompletions.ChatCompletionChunk): OpenAI.ChatCompletionChunk {
       const choice: OpenAI.ChatCompletionChunk.Choice = {
         index: 0,
         delta: {
@@ -151,15 +135,9 @@ export class Completions extends APIResource {
       };
     }
 
-    async function* iterator(): AsyncIterator<
-      OpenAI.ChatCompletionChunk,
-      any,
-      undefined
-    > {
+    async function* iterator(): AsyncIterator<OpenAI.ChatCompletionChunk, any, undefined> {
       if (consumed) {
-        throw new Error(
-          'Cannot iterate over a consumed stream, use `.tee()` to split the stream.',
-        );
+        throw new Error('Cannot iterate over a consumed stream, use `.tee()` to split the stream.');
       }
       consumed = true;
       let done = false;
@@ -205,10 +183,7 @@ export class Completions extends APIResource {
   }
 
   static assert(
-    resp:
-      | ChatCompletions.APIErrorResponse
-      | ChatCompletions.ChatCompletion
-      | ChatCompletions.ChatCompletionChunk,
+    resp: ChatCompletions.APIErrorResponse | ChatCompletions.ChatCompletion | ChatCompletions.ChatCompletionChunk,
   ) {
     if ('code' in resp) {
       throw new APIError(undefined, resp, undefined, undefined);
@@ -219,14 +194,7 @@ export class Completions extends APIResource {
 export interface ChatCompletionCreateParamsNonStreaming
   extends Pick<
     OpenAI.ChatCompletionCreateParamsNonStreaming,
-    | 'messages'
-    | 'stop'
-    | 'stream'
-    | 'temperature'
-    | 'presence_penalty'
-    | 'top_p'
-    | 'max_tokens'
-    | 'seed'
+    'messages' | 'stop' | 'stream' | 'temperature' | 'presence_penalty' | 'top_p' | 'max_tokens' | 'seed'
   > {
   model: ChatModel;
   top_k?: number | null;
@@ -236,29 +204,16 @@ export interface ChatCompletionCreateParamsNonStreaming
 export interface ChatCompletionCreateParamsStreaming
   extends Pick<
     OpenAI.ChatCompletionCreateParamsStreaming,
-    | 'messages'
-    | 'stop'
-    | 'stream'
-    | 'temperature'
-    | 'presence_penalty'
-    | 'top_p'
-    | 'max_tokens'
-    | 'seed'
+    'messages' | 'stop' | 'stream' | 'temperature' | 'presence_penalty' | 'top_p' | 'max_tokens' | 'seed'
   > {
   model: ChatModel;
   top_k?: number | null;
   enable_search?: boolean | null;
 }
 
-export type ChatCompletionCreateParams =
-  | ChatCompletionCreateParamsNonStreaming
-  | ChatCompletionCreateParamsStreaming;
+export type ChatCompletionCreateParams = ChatCompletionCreateParamsNonStreaming | ChatCompletionCreateParamsStreaming;
 
-export type ChatModel =
-  | 'qwen-turbo'
-  | 'qwen-plus'
-  | 'qwen-max'
-  | 'baichuan2-7b-chat-v1';
+export type ChatModel = 'qwen-turbo' | 'qwen-plus' | 'qwen-max' | 'baichuan2-7b-chat-v1';
 
 export namespace ChatCompletions {
   /**

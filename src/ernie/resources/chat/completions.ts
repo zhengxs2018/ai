@@ -22,21 +22,14 @@ export class Completions extends APIResource {
    * - https://cloud.baidu.com/doc/WENXINWORKSHOP/s/jlil56u11
    * - https://github.com/PaddlePaddle/ERNIE-Bot-SDK/blob/develop/erniebot/backends/aistudio.py
    */
-  create(
-    body: ChatCompletionCreateParamsNonStreaming,
-    options?: OpenAI.RequestOptions,
-  ): Promise<OpenAI.ChatCompletion>;
+  create(body: ChatCompletionCreateParamsNonStreaming, options?: OpenAI.RequestOptions): Promise<OpenAI.ChatCompletion>;
   create(
     body: ChatCompletionCreateParamsStreaming,
     options?: OpenAI.RequestOptions,
   ): Promise<Stream<OpenAI.ChatCompletionChunk>>;
 
-  async create(
-    params: ChatCompletionCreateParams,
-    options?: OpenAI.RequestOptions,
-  ) {
-    const { model = 'ernie-bot', ...body } =
-      Completions.buildCreateParams(params);
+  async create(params: ChatCompletionCreateParams, options?: OpenAI.RequestOptions) {
+    const { model = 'ernie-bot', ...body } = Completions.buildCreateParams(params);
 
     const endpoint = this.endpoints[model];
 
@@ -69,19 +62,13 @@ export class Completions extends APIResource {
         controller.abort();
       });
 
-      return Completions.fromOpenAIStream(
-        model,
-        Stream.fromSSEResponse(response, controller),
-        controller,
-      );
+      return Completions.fromOpenAIStream(model, Stream.fromSSEResponse(response, controller), controller);
     }
 
     return Completions.fromResponse(model, await response.json());
   }
 
-  static buildCreateParams(
-    params: ChatCompletionCreateParams,
-  ): ChatCompletions.ChatCompletionCreateParams {
+  static buildCreateParams(params: ChatCompletionCreateParams): ChatCompletions.ChatCompletionCreateParams {
     const { messages = [], presence_penalty, user, stop, ...rest } = params;
 
     const head = messages[0];
@@ -120,10 +107,7 @@ export class Completions extends APIResource {
     return data;
   }
 
-  static fromResponse(
-    model: string,
-    data: ChatCompletions.APIResponse,
-  ): OpenAI.ChatCompletion {
+  static fromResponse(model: string, data: ChatCompletions.APIResponse): OpenAI.ChatCompletion {
     Completions.assert(data);
 
     const result = data.result;
@@ -162,11 +146,7 @@ export class Completions extends APIResource {
     stream: Stream<ChatCompletions.APIResponse>,
     controller: AbortController,
   ): Stream<OpenAI.ChatCompletionChunk> {
-    async function* iterator(): AsyncIterator<
-      OpenAI.ChatCompletionChunk,
-      any,
-      undefined
-    > {
+    async function* iterator(): AsyncIterator<OpenAI.ChatCompletionChunk, any, undefined> {
       for await (const chunk of stream) {
         Completions.assert(chunk);
 
@@ -254,14 +234,7 @@ export class Completions extends APIResource {
 export interface ChatCompletionCreateParamsNonStreaming
   extends Pick<
     OpenAI.ChatCompletionCreateParamsNonStreaming,
-    | 'messages'
-    | 'functions'
-    | 'temperature'
-    | 'top_p'
-    | 'presence_penalty'
-    | 'stream'
-    | 'stop'
-    | 'user'
+    'messages' | 'functions' | 'temperature' | 'top_p' | 'presence_penalty' | 'stream' | 'stop' | 'user'
   > {
   model: ChatModel;
   disable_search?: boolean | null;
@@ -271,29 +244,16 @@ export interface ChatCompletionCreateParamsNonStreaming
 export interface ChatCompletionCreateParamsStreaming
   extends Pick<
     OpenAI.ChatCompletionCreateParamsStreaming,
-    | 'messages'
-    | 'functions'
-    | 'temperature'
-    | 'top_p'
-    | 'presence_penalty'
-    | 'stream'
-    | 'stop'
-    | 'user'
+    'messages' | 'functions' | 'temperature' | 'top_p' | 'presence_penalty' | 'stream' | 'stop' | 'user'
   > {
   model: ChatModel;
   disable_search?: boolean | null;
   enable_citation?: boolean | null;
 }
 
-export type ChatCompletionCreateParams =
-  | ChatCompletionCreateParamsNonStreaming
-  | ChatCompletionCreateParamsStreaming;
+export type ChatCompletionCreateParams = ChatCompletionCreateParamsNonStreaming | ChatCompletionCreateParamsStreaming;
 
-export type ChatModel =
-  | 'ernie-bot'
-  | 'ernie-bot-turbo'
-  | 'ernie-bot-4'
-  | 'ernie-bot-8k';
+export type ChatModel = 'ernie-bot' | 'ernie-bot-turbo' | 'ernie-bot-4' | 'ernie-bot-8k';
 
 export namespace ChatCompletions {
   export interface ChatCompletionCreateParams {

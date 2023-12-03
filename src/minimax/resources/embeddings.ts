@@ -9,10 +9,7 @@ export class Embeddings extends APIResource {
    *
    * See https://cloud.baidu.com/doc/WENXINWORKSHOP/s/alj562vvu
    */
-  async create(
-    params: EmbeddingCreateParams,
-    options?: RequestOptions,
-  ): Promise<OpenAI.CreateEmbeddingResponse> {
+  async create(params: EmbeddingCreateParams, options?: RequestOptions): Promise<OpenAI.CreateEmbeddingResponse> {
     const { model, input, type = 'query' } = params;
 
     const response: Response = await this._client.post('/embeddings', {

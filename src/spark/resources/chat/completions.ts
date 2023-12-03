@@ -32,10 +32,7 @@ export class Completions extends APIResource {
    *
    * See https://help.aliyun.com/zh/dashscope/developer-reference/api-details
    */
-  create(
-    body: ChatCompletionCreateParamsNonStreaming,
-    options?: RequestOptions,
-  ): Promise<OpenAI.ChatCompletion>;
+  create(body: ChatCompletionCreateParamsNonStreaming, options?: RequestOptions): Promise<OpenAI.ChatCompletion>;
   create(
     body: ChatCompletionCreateParamsStreaming,
     options?: RequestOptions,
@@ -96,16 +93,12 @@ export class Completions extends APIResource {
           const encoder = new TextEncoder();
 
           ws.onmessage = event => {
-            const data: ChatCompletions.ChatCompletionResponse = JSON.parse(
-              event.data,
-            );
+            const data: ChatCompletions.ChatCompletionResponse = JSON.parse(event.data);
 
             const { header, payload } = data;
 
             if (header.code !== 0) {
-              ctrl.error(
-                new APIError(undefined, data.header, undefined, undefined),
-              );
+              ctrl.error(new APIError(undefined, data.header, undefined, undefined));
               return;
             }
 
@@ -158,9 +151,7 @@ export class Completions extends APIResource {
 
     return new Promise((resolve, reject) => {
       ws.onmessage = event => {
-        const data: ChatCompletions.ChatCompletionResponse = JSON.parse(
-          event.data,
-        );
+        const data: ChatCompletions.ChatCompletionResponse = JSON.parse(event.data);
 
         const { header, payload } = data;
 
@@ -202,23 +193,19 @@ export class Completions extends APIResource {
   }
 }
 
-export interface ChatCompletionCreateParamsNonStreaming
-  extends OpenAI.ChatCompletionCreateParamsNonStreaming {
+export interface ChatCompletionCreateParamsNonStreaming extends OpenAI.ChatCompletionCreateParamsNonStreaming {
   model: ChatModel;
   top_k?: number | null;
   chat_id?: string | null;
 }
 
-export interface ChatCompletionCreateParamsStreaming
-  extends OpenAI.ChatCompletionCreateParamsStreaming {
+export interface ChatCompletionCreateParamsStreaming extends OpenAI.ChatCompletionCreateParamsStreaming {
   model: ChatModel;
   top_k?: number | null;
   chat_id?: string | null;
 }
 
-export type ChatCompletionCreateParams =
-  | ChatCompletionCreateParamsNonStreaming
-  | ChatCompletionCreateParamsStreaming;
+export type ChatCompletionCreateParams = ChatCompletionCreateParamsNonStreaming | ChatCompletionCreateParamsStreaming;
 
 export type ChatModel = 'spark-1.5' | 'spark-2' | 'spark-3';
 

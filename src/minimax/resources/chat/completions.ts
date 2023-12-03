@@ -34,19 +34,13 @@ export class Completions extends APIResource {
    *
    * See https://api.minimax.chat/document/guides/chat-model/chat/api
    */
-  create(
-    body: ChatCompletionCreateParamsNonStreaming,
-    options?: OpenAI.RequestOptions,
-  ): Promise<OpenAI.ChatCompletion>;
+  create(body: ChatCompletionCreateParamsNonStreaming, options?: OpenAI.RequestOptions): Promise<OpenAI.ChatCompletion>;
   create(
     body: ChatCompletionCreateParamsStreaming,
     options?: OpenAI.RequestOptions,
   ): Promise<Stream<OpenAI.ChatCompletionChunk>>;
 
-  async create(
-    params: ChatCompletionCreateParams,
-    options?: OpenAI.RequestOptions,
-  ) {
+  async create(params: ChatCompletionCreateParams, options?: OpenAI.RequestOptions) {
     const resource = this.resources[params.model];
 
     if (!resource) {
@@ -75,9 +69,7 @@ export class Completions extends APIResource {
     return Completions.fromResponse(params.model, await response.json());
   }
 
-  protected buildCreateParams(
-    params: ChatCompletionCreateParams,
-  ): ChatCompletions.ChatCompletionCreateParams {
+  protected buildCreateParams(params: ChatCompletionCreateParams): ChatCompletions.ChatCompletionCreateParams {
     const { model, messages = [], max_tokens, ...rest } = params;
 
     const data: ChatCompletions.ChatCompletionCreateParams = {
@@ -148,10 +140,7 @@ export class Completions extends APIResource {
     return data;
   }
 
-  static fromResponse(
-    model: ChatModel,
-    data: ChatCompletions.ChatCompletion,
-  ): OpenAI.ChatCompletion {
+  static fromResponse(model: ChatModel, data: ChatCompletions.ChatCompletion): OpenAI.ChatCompletion {
     Completions.assert(data);
 
     return {
@@ -194,9 +183,7 @@ export class Completions extends APIResource {
     let consumed = false;
     const decoder = new SSEDecoder();
 
-    function transform(
-      data: ChatCompletions.ChatCompletionChunk,
-    ): OpenAI.ChatCompletionChunk {
+    function transform(data: ChatCompletions.ChatCompletionChunk): OpenAI.ChatCompletionChunk {
       return {
         id: data.request_id,
         model: model,
@@ -230,15 +217,9 @@ export class Completions extends APIResource {
       };
     }
 
-    async function* iterator(): AsyncIterator<
-      OpenAI.ChatCompletionChunk,
-      any,
-      undefined
-    > {
+    async function* iterator(): AsyncIterator<OpenAI.ChatCompletionChunk, any, undefined> {
       if (consumed) {
-        throw new Error(
-          'Cannot iterate over a consumed stream, use `.tee()` to split the stream.',
-        );
+        throw new Error('Cannot iterate over a consumed stream, use `.tee()` to split the stream.');
       }
       consumed = true;
       let done = false;
@@ -295,19 +276,15 @@ export class Completions extends APIResource {
   }
 }
 
-export interface ChatCompletionCreateParamsNonStreaming
-  extends OpenAI.ChatCompletionCreateParamsNonStreaming {
+export interface ChatCompletionCreateParamsNonStreaming extends OpenAI.ChatCompletionCreateParamsNonStreaming {
   model: ChatModel;
 }
 
-export interface ChatCompletionCreateParamsStreaming
-  extends OpenAI.ChatCompletionCreateParamsStreaming {
+export interface ChatCompletionCreateParamsStreaming extends OpenAI.ChatCompletionCreateParamsStreaming {
   model: ChatModel;
 }
 
-export type ChatCompletionCreateParams =
-  | ChatCompletionCreateParamsNonStreaming
-  | ChatCompletionCreateParamsStreaming;
+export type ChatCompletionCreateParams = ChatCompletionCreateParamsNonStreaming | ChatCompletionCreateParamsStreaming;
 
 export type ChatModel = 'abab5-chat' | 'abab5.5-chat' | 'abab5.5-chat-pro';
 
@@ -437,12 +414,7 @@ export namespace ChatCompletions {
       sender_name: string;
       text: string;
     }[];
-    finish_reason:
-      | 'stop'
-      | 'length'
-      | 'tool_calls'
-      | 'content_filter'
-      | 'function_call';
+    finish_reason: 'stop' | 'length' | 'tool_calls' | 'content_filter' | 'function_call';
   };
 
   export interface ChatCompletion {
@@ -483,12 +455,7 @@ export namespace ChatCompletions {
       sender_name: string;
       text: string;
     }[];
-    finish_reason:
-      | 'stop'
-      | 'length'
-      | 'content_filter'
-      | 'function_call'
-      | null;
+    finish_reason: 'stop' | 'length' | 'content_filter' | 'function_call' | null;
   };
 
   export interface ChatCompletionChunk {

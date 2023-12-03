@@ -11,10 +11,7 @@ export class Completions extends APIResource {
    *
    * See https://cloud.tencent.com/document/product/1729/97732
    */
-  create(
-    body: ChatCompletionCreateParamsNonStreaming,
-    options?: OpenAI.RequestOptions,
-  ): Promise<OpenAI.ChatCompletion>;
+  create(body: ChatCompletionCreateParamsNonStreaming, options?: OpenAI.RequestOptions): Promise<OpenAI.ChatCompletion>;
   create(
     body: ChatCompletionCreateParamsStreaming,
     options?: OpenAI.RequestOptions,
@@ -63,11 +60,7 @@ export class Completions extends APIResource {
         controller.abort();
       });
 
-      return Completions.fromSSEResponse(
-        model,
-        Stream.fromSSEResponse(response, controller),
-        controller,
-      );
+      return Completions.fromSSEResponse(model, Stream.fromSSEResponse(response, controller), controller);
     }
 
     return Completions.fromResponse(model, await response.json());
@@ -78,11 +71,7 @@ export class Completions extends APIResource {
     stream: Stream<ChatCompletions.ChatCompletion>,
     controller: AbortController,
   ): Stream<OpenAI.ChatCompletionChunk> {
-    async function* iterator(): AsyncIterator<
-      OpenAI.ChatCompletionChunk,
-      any,
-      undefined
-    > {
+    async function* iterator(): AsyncIterator<OpenAI.ChatCompletionChunk, any, undefined> {
       for await (const chunk of stream) {
         if (chunk.error) {
           throw new APIError(undefined, chunk.error, undefined, undefined);
@@ -112,10 +101,7 @@ export class Completions extends APIResource {
     return new Stream(iterator, controller);
   }
 
-  static fromResponse(
-    model: string,
-    data: ChatCompletions.ChatCompletion,
-  ): OpenAI.ChatCompletion {
+  static fromResponse(model: string, data: ChatCompletions.ChatCompletion): OpenAI.ChatCompletion {
     if (data.error) {
       throw new APIError(undefined, data.error, undefined, undefined);
     }
@@ -147,19 +133,15 @@ export class Completions extends APIResource {
   }
 }
 
-export interface ChatCompletionCreateParamsNonStreaming
-  extends OpenAI.ChatCompletionCreateParamsNonStreaming {
+export interface ChatCompletionCreateParamsNonStreaming extends OpenAI.ChatCompletionCreateParamsNonStreaming {
   model: ChatModel;
 }
 
-export interface ChatCompletionCreateParamsStreaming
-  extends OpenAI.ChatCompletionCreateParamsStreaming {
+export interface ChatCompletionCreateParamsStreaming extends OpenAI.ChatCompletionCreateParamsStreaming {
   model: ChatModel;
 }
 
-export type ChatCompletionCreateParams =
-  | ChatCompletionCreateParamsNonStreaming
-  | ChatCompletionCreateParamsStreaming;
+export type ChatCompletionCreateParams = ChatCompletionCreateParamsNonStreaming | ChatCompletionCreateParamsStreaming;
 
 export type ChatModel = 'hunyuan';
 

@@ -1,12 +1,6 @@
 import { OpenAIError } from 'openai';
 
-export type Bytes =
-  | string
-  | ArrayBuffer
-  | Uint8Array
-  | Buffer
-  | null
-  | undefined;
+export type Bytes = string | ArrayBuffer | Uint8Array | Buffer | null | undefined;
 
 export type ServerSentEvent = {
   event: string | null;
@@ -132,9 +126,7 @@ export class LineDecoder {
       return [];
     }
 
-    const trailingNewline = LineDecoder.NEWLINE_CHARS.has(
-      text[text.length - 1] || '',
-    );
+    const trailingNewline = LineDecoder.NEWLINE_CHARS.has(text[text.length - 1] || '');
     let lines = text.split(LineDecoder.NEWLINE_REGEXP);
 
     if (lines.length === 1 && !trailingNewline) {
@@ -206,11 +198,7 @@ export class LineDecoder {
 function partition(str: string, delimiter: string): [string, string, string] {
   const index = str.indexOf(delimiter);
   if (index !== -1) {
-    return [
-      str.substring(0, index),
-      delimiter,
-      str.substring(index + delimiter.length),
-    ];
+    return [str.substring(0, index), delimiter, str.substring(index + delimiter.length)];
   }
 
   return [str, '', ''];
@@ -222,9 +210,7 @@ function partition(str: string, delimiter: string): [string, string, string] {
  *
  * This polyfill was pulled from https://github.com/MattiasBuelens/web-streams-polyfill/pull/122#issuecomment-1627354490
  */
-export function readableStreamAsyncIterable<T>(
-  stream: any,
-): AsyncIterableIterator<T> {
+export function readableStreamAsyncIterable<T>(stream: any): AsyncIterableIterator<T> {
   if (stream[Symbol.asyncIterator]) return stream;
 
   const reader = stream.getReader();

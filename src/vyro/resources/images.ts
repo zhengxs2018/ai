@@ -23,10 +23,7 @@ export class Images extends APIResource {
   /**
    * Creates a variation of a given image.
    */
-  async createVariation(
-    params: ImageCreateVariationParams,
-    options?: RequestOptions,
-  ): Promise<ImagesResponse> {
+  async createVariation(params: ImageCreateVariationParams, options?: RequestOptions): Promise<ImagesResponse> {
     const client = this._client;
 
     const formData = new FormData();
@@ -43,18 +40,15 @@ export class Images extends APIResource {
     formData.append('cfg', (params.cfg || 7.5).toString());
     formData.append('seed', (params.seed || random(1, 1000000)).toString());
 
-    const response: Response = await client.post(
-      `/imagine/${client.apiType}/generations/variations`,
-      {
-        ...options,
-        // @ts-expect-error
-        body: {
-          body: formData,
-          [Symbol.toStringTag]: 'MultipartBody',
-        },
-        __binaryResponse: true,
+    const response: Response = await client.post(`/imagine/${client.apiType}/generations/variations`, {
+      ...options,
+      // @ts-expect-error
+      body: {
+        body: formData,
+        [Symbol.toStringTag]: 'MultipartBody',
       },
-    );
+      __binaryResponse: true,
+    });
 
     return {
       data: [
@@ -69,10 +63,7 @@ export class Images extends APIResource {
   /**
    * Experience the magic of Imagine's Image Remix feature, designed to breathe new life into your existing images.
    */
-  async edit(
-    params: ImageEditParams,
-    options?: RequestOptions,
-  ): Promise<ImagesResponse> {
+  async edit(params: ImageEditParams, options?: RequestOptions): Promise<ImagesResponse> {
     const client = this._client;
 
     const formData = new FormData();
@@ -90,18 +81,15 @@ export class Images extends APIResource {
     formData.append('cfg', (params.cfg || 7.5).toString());
     formData.append('seed', (params.seed || random(1, 1000000)).toString());
 
-    const response: Response = await client.post(
-      `/imagine/${client.apiType}/edits/remix`,
-      {
-        ...options,
-        // @ts-expect-error
-        body: {
-          body: formData,
-          [Symbol.toStringTag]: 'MultipartBody',
-        },
-        __binaryResponse: true,
+    const response: Response = await client.post(`/imagine/${client.apiType}/edits/remix`, {
+      ...options,
+      // @ts-expect-error
+      body: {
+        body: formData,
+        [Symbol.toStringTag]: 'MultipartBody',
       },
-    );
+      __binaryResponse: true,
+    });
 
     return {
       data: [
@@ -116,10 +104,7 @@ export class Images extends APIResource {
   /**
    * Creates an image given a prompt.
    */
-  async generate(
-    params: ImageGenerateParams,
-    options?: RequestOptions,
-  ): Promise<ImagesResponse> {
+  async generate(params: ImageGenerateParams, options?: RequestOptions): Promise<ImagesResponse> {
     const client = this._client;
 
     const formData = new FormData();
@@ -135,18 +120,15 @@ export class Images extends APIResource {
     formData.append('seed', (params.seed || random(1, 1000000)).toString());
     formData.append('high_res_results', params.quality === 'hd' ? '1' : '0');
 
-    const response: Response = await client.post(
-      `/imagine/${client.apiType}/generations`,
-      {
-        ...options,
-        // @ts-expect-error
-        body: {
-          body: formData,
-          [Symbol.toStringTag]: 'MultipartBody',
-        },
-        __binaryResponse: true,
+    const response: Response = await client.post(`/imagine/${client.apiType}/generations`, {
+      ...options,
+      // @ts-expect-error
+      body: {
+        body: formData,
+        [Symbol.toStringTag]: 'MultipartBody',
       },
-    );
+      __binaryResponse: true,
+    });
 
     return {
       created: Math.floor(Date.now() / 1000),
@@ -161,10 +143,7 @@ export class Images extends APIResource {
   /**
    * The image upscale feature provides a better image to the user by increasing its resolution.
    */
-  async upscale(
-    params: ImageUpscaleParams,
-    options?: RequestOptions,
-  ): Promise<ImagesResponse> {
+  async upscale(params: ImageUpscaleParams, options?: RequestOptions): Promise<ImagesResponse> {
     const client = this._client;
 
     const formData = new FormData();
@@ -172,18 +151,15 @@ export class Images extends APIResource {
     // @ts-expect-error
     formData.append('image', await toFile(params.image));
 
-    const response: Response = await client.post(
-      `/imagine/${client.apiType}/upscale`,
-      {
-        ...options,
-        // @ts-expect-error
-        body: {
-          body: formData,
-          [Symbol.toStringTag]: 'MultipartBody',
-        },
-        __binaryResponse: true,
+    const response: Response = await client.post(`/imagine/${client.apiType}/upscale`, {
+      ...options,
+      // @ts-expect-error
+      body: {
+        body: formData,
+        [Symbol.toStringTag]: 'MultipartBody',
       },
-    );
+      __binaryResponse: true,
+    });
 
     return {
       created: Math.floor(Date.now() / 1000),
@@ -199,10 +175,7 @@ export class Images extends APIResource {
    * Inpaint is an advanced feature of the Text-to-Image Stable Diffusion pipeline.
    * It allows users to remove unwanted objects or elements from an image by intelligently filling in the missing areas.
    */
-  async restoration(
-    params: ImageRestorationParams,
-    options?: RequestOptions,
-  ): Promise<ImagesResponse> {
+  async restoration(params: ImageRestorationParams, options?: RequestOptions): Promise<ImagesResponse> {
     const client = this._client;
 
     const formData = new FormData();
@@ -217,18 +190,15 @@ export class Images extends APIResource {
     formData.append('inpaint_strength', (params.strength || 0).toString());
     formData.append('cfg', (params.cfg || 7.5).toString());
 
-    const response: Response = await client.post(
-      `/imagine/${client.apiType}/generations/variations`,
-      {
-        ...options,
-        // @ts-expect-error
-        body: {
-          body: formData,
-          [Symbol.toStringTag]: 'MultipartBody',
-        },
-        __binaryResponse: true,
+    const response: Response = await client.post(`/imagine/${client.apiType}/generations/variations`, {
+      ...options,
+      // @ts-expect-error
+      body: {
+        body: formData,
+        [Symbol.toStringTag]: 'MultipartBody',
       },
-    );
+      __binaryResponse: true,
+    });
 
     return {
       data: [
