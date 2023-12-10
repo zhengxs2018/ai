@@ -58,11 +58,15 @@ import { MinimaxAI } from '@zhengxs/ai';
 
 const client = new MinimaxAI();
 
-const response = client.embeddings.create({
-  model: 'embo-01',
-  type: 'query', // Default query
-  input: 'Your text string goes here',
-});
+async function main() {
+  const response = await client.embeddings.create({
+    model: 'embo-01',
+    type: 'query', // Default query
+    input: 'Your text string goes here',
+  });
 
-print(response.data[0].embedding);
+  console.log(response.data[0].embedding);
+}
+
+main();
 ```
