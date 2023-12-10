@@ -84,7 +84,7 @@ main();
 - [x] [阿里通义千问大模型](https://tongyi.aliyun.com/)
   - [x] Chat 支持 [通义千问 VL](https://help.aliyun.com/zh/dashscope/developer-reference/qwen-vl-plus) 模型
   - [x] Embeddings
-  - [ ] Audio
+  - [ ] ~~Audio~~ 等 [文档](https://help.aliyun.com/zh/dashscope/developer-reference/sambert-speech-synthesis) 的请求地址补全后再尝试
   - [ ] Images
     - [x] generate
 - [x] [讯飞星火认知大模型](https://xinghuo.xfyun.cn/)
