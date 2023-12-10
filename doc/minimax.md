@@ -51,7 +51,7 @@ main();
 目前仅支持 `embo-01` 模型
 
 > [!IMPORTANT]
-> MiniMax 使用自研的 Embedding 模型得到文本对应的浮点向量，使用时需要区分是用于 `db` 存储，还是 `query` 查询。
+> MiniMax 使用时需要区分是用于 `db` 存储，还是 `query` 查询，默认是 `query`。
 
 ```ts
 import { MinimaxAI } from '@zhengxs/ai';
@@ -60,6 +60,7 @@ const client = new MinimaxAI();
 
 const response = client.embeddings.create({
   model: 'embo-01',
+  type: 'query', // Default query
   input: 'Your text string goes here',
 });
 
