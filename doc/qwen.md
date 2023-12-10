@@ -139,3 +139,20 @@ async function main() {
 
 main();
 ```
+
+## 语义向量
+
+支持 `text-embedding-v1` 和 `text-embedding-v2` 模型。
+
+```ts
+import { QWenAI } from '@zhengxs/ai';
+
+const client = new QWenAI();
+
+const embedding = await client.embeddings.create({
+  model: 'text-embedding-v1',
+  input: ['推荐一些美食', '给我讲个故事'],
+});
+
+console.log(embedding.data);
+```
