@@ -10,33 +10,34 @@ export class Images extends APIResource {
   async generate(params: ImageGenerateParams, options: RequestOptions = {}): Promise<OpenAI.ImagesResponse> {
     const client = this._client;
 
-    const { headers, ...config } = options
+    const { headers, ...config } = options;
     const { model = 'wanx-v1', prompt, n = 1, ...rest } = params;
 
-    const taskId = await client.post<any, Response>('/services/aigc/text2image/image-synthesis', {
-      ...config,
-      headers: { 'X-DashScope-Async': 'enable', ...headers },
-      body: {
-        model,
-        input: {
-          prompt
+    const taskId = await client
+      .post<any, Response>('/services/aigc/text2image/image-synthesis', {
+        ...config,
+        headers: { 'X-DashScope-Async': 'enable', ...headers },
+        body: {
+          model,
+          input: {
+            prompt,
+          },
+          parameters: {
+            ...rest,
+            n,
+          },
         },
-        parameters: {
-          ...rest,
-          n
-        }
-      },
-      __binaryResponse: true,
-    })
+        __binaryResponse: true,
+      })
       .then<ImageCreateTaskResponse>(res => res.json())
-      .then(res => res.output.task_id)
+      .then(res => res.output.task_id);
 
     return this.waitTask(taskId, options).then(images => {
       return {
         created: Date.now() / 1000,
-        data: images
-      }
-    })
+        data: images,
+      };
+    });
   }
 
   protected async waitTask(taskId: string, options?: RequestOptions): Promise<ImageTask.Image[]> {
@@ -45,25 +46,25 @@ export class Images extends APIResource {
         ...options,
         __binaryResponse: true,
       })
-      .then<ImageTaskQueryResponse>(response => response.json())
+      .then<ImageTaskQueryResponse>(response => response.json());
 
-    const { task_status } = response.output
+    const { task_status } = response.output;
 
     if (task_status === 'PENDING' || task_status === 'RUNNING') {
       return new Promise<ImageTask.Image[]>(resolve => {
-        setTimeout(() => resolve(this.waitTask(taskId, options)), 5000)
-      })
+        setTimeout(() => resolve(this.waitTask(taskId, options)), 5000);
+      });
     }
 
     if (task_status === 'SUCCEEDED') {
-      return response.output.results.filter(result => 'url' in result) as ImageTask.Image[]
+      return response.output.results.filter(result => 'url' in result) as ImageTask.Image[];
     }
 
     if (task_status === 'FAILED') {
-      throw new OpenAIError((response as ImageTaskFailedResponse).message)
+      throw new OpenAIError((response as ImageTaskFailedResponse).message);
     }
 
-    throw new OpenAIError('Unknown task status')
+    throw new OpenAIError('Unknown task status');
   }
 }
 
@@ -72,87 +73,91 @@ type ImageCreateTaskResponse = {
   output: {
     task_id: string;
     task_status: ImageTask.Status;
-  }
-}
+  };
+};
 
-type ImageTaskQueryResponse = ImageTaskPendingResponse | ImageTaskRunningResponse | ImageTaskFinishedResponse | ImageTaskFailedResponse | ImageTaskUnknownResponse
+type ImageTaskQueryResponse =
+  | ImageTaskPendingResponse
+  | ImageTaskRunningResponse
+  | ImageTaskFinishedResponse
+  | ImageTaskFailedResponse
+  | ImageTaskUnknownResponse;
 
 type ImageTaskPendingResponse = {
   request_id: string;
   output: {
     task_id: string;
     task_status: 'PENDING';
-    task_metrics: ImageTask.Metrics
+    task_metrics: ImageTask.Metrics;
     submit_time: string;
-    scheduled_time: string
-  }
-}
+    scheduled_time: string;
+  };
+};
 
 type ImageTaskRunningResponse = {
   request_id: string;
   output: {
     task_id: string;
     task_status: 'RUNNING';
-    task_metrics: ImageTask.Metrics
+    task_metrics: ImageTask.Metrics;
     submit_time: string;
-    scheduled_time: string
-  }
-}
+    scheduled_time: string;
+  };
+};
 
 type ImageTaskFinishedResponse = {
   request_id: string;
   output: {
     task_id: string;
     task_status: 'SUCCEEDED';
-    task_metrics: ImageTask.Metrics
-    results: (ImageTask.Image | ImageTask.FailedError)[],
-    submit_time: string
-    scheduled_time: string
-    end_time: string
-  }
+    task_metrics: ImageTask.Metrics;
+    results: (ImageTask.Image | ImageTask.FailedError)[];
+    submit_time: string;
+    scheduled_time: string;
+    end_time: string;
+  };
   usage: {
-    image_count: number
-  }
-}
+    image_count: number;
+  };
+};
 
 type ImageTaskFailedResponse = {
   request_id: string;
-  code: string
-  message: string
+  code: string;
+  message: string;
   output: {
     task_status: 'FAILED';
-    task_metrics: ImageTask.Metrics
+    task_metrics: ImageTask.Metrics;
     submit_time: string;
-    scheduled_time: string
-  }
-}
+    scheduled_time: string;
+  };
+};
 
 type ImageTaskUnknownResponse = {
   request_id: string;
   output: {
     task_status: 'UNKNOWN';
-    task_metrics: ImageTask.Metrics
-  }
-}
+    task_metrics: ImageTask.Metrics;
+  };
+};
 
 namespace ImageTask {
   export type Image = {
-    url: string
-  }
-
+    url: string;
+  };
 
   export type FailedError = {
-    code: string
-    message: string
-  }
+    code: string;
+    message: string;
+  };
 
   export type Status = 'PENDING' | 'RUNNING' | 'SUCCEEDED' | 'FAILED' | 'UNKNOWN';
 
   export type Metrics = {
-    TOTAL: number
-    SUCCEEDED: number
-    FAILED: number
-  }
+    TOTAL: number;
+    SUCCEEDED: number;
+    FAILED: number;
+  };
 }
 
 // {
@@ -234,7 +239,18 @@ export namespace Images {
      *
      * @defaultValue <auto>
      */
-    style?: '<photography>' | '<portrait>' | '<3d cartoon>' | '<anime>' | '<oil painting>' | '<watercolor>' | '<sketch>' | '<chinese painting>' | '<flat illustration>' | '<auto>' | null;
+    style?:
+      | '<photography>'
+      | '<portrait>'
+      | '<3d cartoon>'
+      | '<anime>'
+      | '<oil painting>'
+      | '<watercolor>'
+      | '<sketch>'
+      | '<chinese painting>'
+      | '<flat illustration>'
+      | '<auto>'
+      | null;
 
     /**
      * The number of images to generate. Must be between 1 and 4.

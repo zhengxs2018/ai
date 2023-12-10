@@ -21,6 +21,6 @@ export function saveFile(binary: ReadableStream, name?: string) {
 }
 
 export async function downloadImage(url: string) {
-  const data = await fetch(url).then(response => response.body)
-  saveFile(data as unknown as ReadableStream, 'test.png')
+  const data = await fetch(url).then(response => response.body);
+  saveFile(data as unknown as ReadableStream, 'test.png');
 }

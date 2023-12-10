@@ -1,6 +1,5 @@
 import { QWenAI } from '../../../src';
-
-import { downloadImage } from '../../shared'
+import { downloadImage } from '../../shared';
 
 const ai = new QWenAI();
 
@@ -10,7 +9,7 @@ async function main() {
   });
 
   for await (const image of data) {
-    downloadImage(image.url!)
+    downloadImage(image.url!);
   }
 }
 

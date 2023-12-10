@@ -82,8 +82,9 @@ main();
   - [x] Embeddings
   - [ ] ~~Images~~ 飞浆平台不支持
 - [x] [阿里通义千问大模型](https://tongyi.aliyun.com/)
-  - [x] Chat
-  - [ ] Embeddings
+  - [x] Chat 支持 [通义千问 VL](https://help.aliyun.com/zh/dashscope/developer-reference/qwen-vl-plus) 模型
+  - [x] Embeddings
+  - [ ] Audio
   - [ ] Images
     - [x] generate
 - [x] [讯飞星火认知大模型](https://xinghuo.xfyun.cn/)

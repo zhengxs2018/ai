@@ -1,5 +1,6 @@
 import type { Agent } from 'node:http';
 
+import { APIError } from 'openai';
 import { APIClient, type DefaultQuery, type Fetch, type FinalRequestOptions, type Headers } from 'openai/core';
 
 import * as API from './resources';
@@ -57,6 +58,8 @@ export class QWenAI extends APIClient {
 
   chat = new API.Chat(this);
 
+  embeddings = new API.Embeddings(this);
+
   images = new API.Images(this);
 
   protected override authHeaders() {
@@ -75,6 +78,15 @@ export class QWenAI extends APIClient {
   protected override defaultQuery(): DefaultQuery | undefined {
     return this._options.defaultQuery;
   }
+
+  protected override makeStatusError(
+    status: number | undefined,
+    error: Record<string, any> | undefined,
+    message: string | undefined,
+    headers: Headers | undefined,
+  ) {
+    return APIError.generate(status, { error }, message, headers);
+  }
 }
 
 export namespace QWenAI {
@@ -83,6 +95,10 @@ export namespace QWenAI {
   export type ChatCompletionCreateParams = API.ChatCompletionCreateParams;
   export type ChatCompletionCreateParamsNonStreaming = API.ChatCompletionCreateParamsNonStreaming;
   export type ChatCompletionCreateParamsStreaming = API.ChatCompletionCreateParamsStreaming;
+
+  export type Embeddings = API.Embeddings;
+  export type EmbeddingModel = API.EmbeddingModel;
+  export type EmbeddingCreateParams = API.EmbeddingCreateParams;
 
   export type Images = API.Images;
   export type ImageModel = API.ImageModel;
