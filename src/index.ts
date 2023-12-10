@@ -7,9 +7,21 @@ import QWenAI, { QWenAIOptions } from './qwen';
 import SparkAI, { SparkAIOptions } from './spark';
 import VYroAI, { VYroAIOptions } from './vyro';
 
-export { ErnieAI, HunYuanAI, MinimaxAI, OpenAI, QWenAI, SparkAI, VYroAI };
-
-export type { ErnieAIOptions, HunYuanAIOptions, MinimaxAIOptions, QWenAIOptions, SparkAIOptions, VYroAIOptions };
+export {
+  ErnieAI,
+  type ErnieAIOptions,
+  HunYuanAI,
+  type HunYuanAIOptions,
+  MinimaxAI,
+  type MinimaxAIOptions,
+  OpenAI,
+  QWenAI,
+  type QWenAIOptions,
+  SparkAI,
+  type SparkAIOptions,
+  VYroAI,
+  type VYroAIOptions,
+};
 
 export {
   OpenAIError,
@@ -30,3 +42,7 @@ export {
 export * from './resource';
 export * from './streaming';
 export * from './util';
+
+export default {
+  version: process.env.PKG_VERSION,
+};
