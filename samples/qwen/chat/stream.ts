@@ -1,4 +1,4 @@
-import { QWenAI } from '../../src';
+import { QWenAI } from '../../../src';
 
 const qwenai = new QWenAI();
 

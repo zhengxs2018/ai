@@ -28,7 +28,11 @@ export class Completions extends APIResource {
 
     const body = Completions.buildCreateParams(params);
 
-    const response: Response = await this._client.post('/services/aigc/text-generation/generation', {
+    const path = isMultiModal(params.model)
+      ? '/services/aigc/multimodal-generation/generation'
+      : '/services/aigc/text-generation/generation';
+
+    const response: Response = await this._client.post(path, {
       ...options,
       // @ts-expect-error 类型冲突？
       body,
@@ -53,22 +57,48 @@ export class Completions extends APIResource {
   }
 
   static buildCreateParams(params: ChatCompletionCreateParams): ChatCompletions.ChatCompletionCreateParams {
-    const { model, messages, presence_penalty, ...rest } = params;
+    const { model, messages, presence_penalty, ...parameters } = params;
 
     const data: ChatCompletions.ChatCompletionCreateParams = {
       model,
       input: {
         messages,
       },
-      parameters: {
-        ...rest,
-        repetition_penalty: presence_penalty,
-        result_format: 'text', // 强制使用 text 格式
-      },
+      parameters,
     };
 
-    if (params.stream) {
-      data.parameters.incremental_output = true;
+    if (isMultiModal(model)) {
+      // 修复与 OpenAI 的兼容性问题
+      data.input.messages.forEach(message => {
+        if (Array.isArray(message.content)) {
+          message.content.forEach(part => {
+            if (part.type === 'image_url') {
+              // @ts-expect-error
+              part.image = part.image_url.url;
+
+              // @ts-expect-error
+              delete part.image_url;
+            }
+
+            // @ts-expect-error
+            delete part.type;
+          });
+        } else {
+          message.content = [
+            // @ts-expect-error
+            { text: message.content! },
+          ];
+        }
+
+        return message;
+      });
+    } else {
+      data.parameters.result_format = 'text';
+      data.parameters.repetition_penalty = presence_penalty;
+
+      if (params.stream) {
+        data.parameters.incremental_output = true;
+      }
     }
 
     return data;
@@ -85,8 +115,19 @@ export class Completions extends APIResource {
         role: 'assistant',
         content: output.text,
       },
-      finish_reason: output.finish_reason,
+      finish_reason: output.finish_reason || 'stop',
     };
+
+    if (isMultiModal(model)) {
+      const { message } = output.choices[0];
+
+      const content = message.content;
+
+      choice.message = {
+        role: 'assistant',
+        content: Array.isArray(content) ? content[0].text : content,
+      };
+    }
 
     return {
       id: data.request_id,
@@ -121,6 +162,11 @@ export class Completions extends APIResource {
       };
 
       const finish_reason = data.output.finish_reason;
+
+      if (isMultiModal(model)) {
+        // @ts-expect-error
+        choice.delta = data.output.choices[0].message;
+      }
 
       if (finish_reason !== 'null') {
         choice.finish_reason = finish_reason;
@@ -191,6 +237,10 @@ export class Completions extends APIResource {
   }
 }
 
+function isMultiModal(model: ChatModel): boolean {
+  return model.startsWith('qwen-vl');
+}
+
 export interface ChatCompletionCreateParamsNonStreaming
   extends Pick<
     OpenAI.ChatCompletionCreateParamsNonStreaming,
@@ -220,7 +270,11 @@ export type ChatModel =
   | 'qwen-max'
   | 'qwen-max-1201'
   | 'qwen-max-longcontext'
-  | 'baichuan2-7b-chat-v1';
+  | 'baichuan2-7b-chat-v1'
+  // 多模型
+  | 'qwen-vl-v1'
+  | 'qwen-vl-chat-v1'
+  | 'qwen-vl-plus';
 
 export namespace ChatCompletions {
   /**
@@ -336,6 +390,8 @@ export namespace ChatCompletions {
     output: {
       text: string;
       finish_reason: 'stop' | 'length';
+      // Note: 仅多模型支持
+      choices: OpenAI.ChatCompletion['choices'];
     };
   }
 
@@ -345,6 +401,9 @@ export namespace ChatCompletions {
     output: {
       text: string;
       finish_reason: 'stop' | 'length' | 'null';
+
+      // Note: 仅多模型支持
+      choices: OpenAI.ChatCompletion['choices'];
     };
   }
 

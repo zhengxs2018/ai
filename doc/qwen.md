@@ -71,3 +71,71 @@ async function main() {
 
 main();
 ```
+
+## 通义千问 VL
+
+[通义千问VL](https://help.aliyun.com/zh/dashscope/developer-reference/qwen-vl-plus) 开源视觉理解大模型Qwen-VL于2023年12月1日发布重大更新，不仅大幅提升通用OCR、视觉推理、中文文本理解基础能力，还能处理各种分辨率和规格的图像，甚至能“看图做题”。
+
+```js
+import { createWriteStream } from 'node:fs';
+import path from 'node:path';
+
+import { QWenAI } from '@zhengxs/ai';
+
+const client = new QWenAI();
+
+async function main() {
+  const chatCompletion = await client.chat.completions.create({
+    model: 'qwen-vl-plus',
+    messages: [
+      {
+        role: 'user',
+        content: '你好',
+      },
+    ],
+  });
+
+  console.log(chatCompletion.choices[0].message.content);
+}
+
+main();
+```
+
+### 携带图片
+
+你可以使用数组携带图片和文字
+
+> [!WARNING]
+> 目前发现携带的图片如果无法访问，会直接抛 400 错误
+
+```js
+import { createWriteStream } from 'node:fs';
+import path from 'node:path';
+
+import { QWenAI } from '@zhengxs/ai';
+
+const client = new QWenAI();
+
+async function main() {
+  const chatCompletion = await client.chat.completions.create({
+    model: 'qwen-vl-plus',
+    messages: [
+      {
+        role: 'user',
+        content: [
+          {
+            type: 'image_url',
+            image_url: { url: 'https://www.baidu.com/img/PCfb_5bf082d29588c07f842ccde3f97243ea.png' },
+          },
+          { type: 'text', text: '这是什么图?' },
+        ],
+      },
+    ],
+  });
+
+  console.log(chatCompletion.choices[0].message.content);
+  //=> "这是一张百度的logo图片。"
+}
+
+main();
+```
