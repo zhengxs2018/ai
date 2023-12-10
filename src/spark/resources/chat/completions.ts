@@ -2,7 +2,6 @@ import OpenAI, { APIError } from 'openai';
 import { RequestOptions } from 'openai/core';
 import { Stream } from 'openai/streaming';
 
-import { WebSocket } from '../../../_shims';
 import { APIResource } from '../../resource';
 
 export class Completions extends APIResource {
@@ -81,7 +80,7 @@ export class Completions extends APIResource {
       });
     }
 
-    const ws: WebSocket = new WebSocket(url);
+    const ws: WebSocket = new globalThis.WebSocket(url);
 
     ws.onopen = () => {
       ws.send(JSON.stringify(body));

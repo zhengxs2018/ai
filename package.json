@@ -8,13 +8,20 @@
     "ai",
     "llm",
     "qwen",
-    "ernie-bot"
+    "ernie-bot",
+    "hunyuan",
+    "minimax"
   ],
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs",
       "types": "./dist-types/index.d.ts"
+    },
+    "./shims/node": {
+      "import": "./dist/shims/node.mjs",
+      "require": "./dist/shims/node.cjs",
+      "types": "./dist-types/shims/node.d.ts"
     },
     "./package.json": "./package.json"
   },
@@ -45,9 +52,11 @@
     "fmt": "prettier --write \"**/*.{ts,json,,md}\" --log-level warn"
   },
   "packageManager": "pnpm@7.0.0",
+  "optionalDependencies": {
+    "ws": ">=8.0.0"
+  },
   "dependencies": {
-    "openai": "^4.20.1",
-    "ws": "^8.14.2"
+    "openai": "^4.20.1"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.2.1",
@@ -67,6 +76,7 @@
     "lint-staged": "^15.0.2",
     "mkdirp": "^3.0.1",
     "prettier": "^3.0.3",
+    "ws": "^8.14.2",
     "trash-cli": "^5.0.0",
     "tsconfig-paths": "^4.2.0",
     "typescript": "~5.0.4",
