@@ -97,6 +97,7 @@ main();
   - [x] Chat
   - [x] Embeddings
   - [ ] Audio
+    - [x] speech.create
   - [ ] Files
   - [ ] Retrieval（知识库检索）
 - [x] [ImagineArt](https://platform.imagine.art/api-reference)

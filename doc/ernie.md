@@ -54,10 +54,14 @@ import { ErnieAI } from '@zhengxs/ai';
 
 const client = new ErnieAI();
 
-const response = client.embeddings.create({
-  model: 'ernie-text-embedding',
-  input: 'Your text string goes here',
-});
+async function main() {
+  const response = await client.embeddings.create({
+    model: 'ernie-text-embedding',
+    input: 'Your text string goes here',
+  });
 
-print(response.data[0].embedding);
+  console.log(response.data[0].embedding);
+}
+
+main();
 ```

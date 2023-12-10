@@ -46,6 +46,8 @@ export class MinimaxAI extends APIClient {
     this.orgId = orgId;
   }
 
+  audio = new API.Audio(this);
+
   chat = new API.Chat(this);
 
   embeddings = new API.Embeddings(this);
@@ -77,6 +79,11 @@ export namespace MinimaxAI {
   export type ChatCompletionCreateParams = API.ChatCompletionCreateParams;
   export type ChatCompletionCreateParamsNonStreaming = API.ChatCompletionCreateParamsNonStreaming;
   export type ChatCompletionCreateParamsStreaming = API.ChatCompletionCreateParamsStreaming;
+
+  export type Embeddings = API.Embeddings;
+  export type EmbeddingCreateParams = API.EmbeddingCreateParams;
+
+  export type Audio = API.Audio;
 }
 
 export default MinimaxAI;

@@ -1,13 +1,14 @@
-import OpenAI, { APIError } from 'openai';
+import OpenAI from 'openai';
 import { type RequestOptions } from 'openai/core';
 
 import { APIResource } from '../../resource';
+import { assertStatusCode } from '../error';
 
 export class Embeddings extends APIResource {
   /**
    * Creates an embedding vector representing the input text.
    *
-   * See https://cloud.baidu.com/doc/WENXINWORKSHOP/s/alj562vvu
+   * See https://api.minimax.chat/document/guides/Embeddings
    */
   async create(params: EmbeddingCreateParams, options?: RequestOptions): Promise<OpenAI.CreateEmbeddingResponse> {
     const { model, input, type = 'query' } = params;
@@ -24,7 +25,7 @@ export class Embeddings extends APIResource {
 
     const data: CreateEmbeddingResponse = await response.json();
 
-    Embeddings.assert(data);
+    assertStatusCode(data);
 
     return {
       data: data.vectors.map((embedding, index) => {
@@ -41,23 +42,6 @@ export class Embeddings extends APIResource {
         total_tokens: data.total_tokens,
       },
     };
-  }
-
-  /**
-   * 如果 code 不为 0，抛出 APIError
-   *
-   * @param code -
-   * @param message -
-   */
-  static assert(data: CreateEmbeddingResponse) {
-    if (data.base_resp.status_code === 0) return;
-
-    const error = {
-      code: data.base_resp.status_code,
-      message: data.base_resp.status_msg,
-    };
-
-    throw new APIError(undefined, error, undefined, undefined);
   }
 }
 

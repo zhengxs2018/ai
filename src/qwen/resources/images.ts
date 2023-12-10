@@ -166,7 +166,8 @@ export type ImageModel = Images.ImageModel;
 export type ImageGenerateParams = Images.ImageGenerateParams;
 
 export namespace Images {
-  export type ImageModel = (string & NonNullable<unknown>)
+  export type ImageModel =
+    | (string & NonNullable<unknown>)
     // 通义万相
     | 'wanx-v1'
     // Stable Diffusion
@@ -224,17 +225,17 @@ export namespace Images {
      * @defaultValue <auto>
      */
     style?:
-    | '<photography>'
-    | '<portrait>'
-    | '<3d cartoon>'
-    | '<anime>'
-    | '<oil painting>'
-    | '<watercolor>'
-    | '<sketch>'
-    | '<chinese painting>'
-    | '<flat illustration>'
-    | '<auto>'
-    | null;
+      | '<photography>'
+      | '<portrait>'
+      | '<3d cartoon>'
+      | '<anime>'
+      | '<oil painting>'
+      | '<watercolor>'
+      | '<sketch>'
+      | '<chinese painting>'
+      | '<flat illustration>'
+      | '<auto>'
+      | null;
 
     /**
      * The number of images to generate. Must be between 1 and 4.
