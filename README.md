@@ -68,6 +68,7 @@ main();
 - [文心一言](./doc/ernie.md)
 - [通义千问](./doc/qwen.md)
 - [讯飞星火](./doc/spark.md)
+- [混元助手](./doc/hunyuan.md)
 - [Minimax](./doc/minimax.md)
 - [ImagineArt](./doc/vyro.md)
 
@@ -77,7 +78,7 @@ main();
 
 ## 待办
 
-- [x] 百度文心一言大模型 [百度飞桨分发](https://aistudio.baidu.com/cooperate/yiyan)
+- [x] [百度文心一言大模型](https://aistudio.baidu.com/cooperate/yiyan) (飞桨平台分发)
   - [x] Chat
   - [x] Embeddings
   - [ ] ~~Images~~ 飞浆平台不支持
@@ -91,7 +92,7 @@ main();
   - [x] Chat
   - [ ] ~~Embeddings~~ 未获得资格
   - [ ] ~~Images~~ 未获得资格
-- [x] [腾讯混元大模型](https://hunyuan.tencent.com/)
+- [x] [腾讯混元助手大模型](https://hunyuan.tencent.com/)
   - [x] Chat
 - [x] [Minimax](https://api.minimax.chat/)
   - [x] Chat

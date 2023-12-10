@@ -6,7 +6,7 @@
 
 ## 通用对话
 
-当前支持 `qwen-turbo | qwen-plus | qwen-max | qwen-max-1201 | qwen-max-longcontext | baichuan2-7b-chat-v1` 模型。
+当前支持大部分千问，以及其他系列的同类模型。
 
 ```ts
 import { QWenAI } from '@zhengxs/ai';
@@ -134,7 +134,7 @@ console.log(embedding.data);
 
 ## 文生图
 
-目前支持 `wanx-v1`, `stable-diffusion-v1.5` 和 `stable-diffusion-xl` 模型;
+支持 `wanx-v1`, `stable-diffusion-v1.5` 和 `stable-diffusion-xl` 模型;
 
 ```js
 import path from 'node:path';
