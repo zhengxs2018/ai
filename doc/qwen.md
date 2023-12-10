@@ -47,31 +47,6 @@ async function main() {
 main();
 ```
 
-## 文生图
-
-目前仅支持 `wanx-v1` 模型;
-
-```js
-import { createWriteStream } from 'node:fs';
-import path from 'node:path';
-
-import { QWenAI } from '@zhengxs/ai';
-
-const client = new QWenAI();
-
-async function main() {
-  const images = await client.images.generate({
-    prompt: 'cat',
-  });
-
-  for (const image of images.data) {
-    console.log(image.url);
-  }
-}
-
-main();
-```
-
 ## 通义千问 VL
 
 [通义千问VL](https://help.aliyun.com/zh/dashscope/developer-reference/qwen-vl-plus) 开源视觉理解大模型Qwen-VL于2023年12月1日发布重大更新，不仅大幅提升通用OCR、视觉推理、中文文本理解基础能力，还能处理各种分辨率和规格的图像，甚至能“看图做题”。
@@ -155,4 +130,28 @@ const embedding = await client.embeddings.create({
 });
 
 console.log(embedding.data);
+```
+
+## 文生图
+
+目前支持 `wanx-v1`, `stable-diffusion-v1.5` 和 `stable-diffusion-xl` 模型;
+
+```js
+import path from 'node:path';
+
+import { QWenAI } from '@zhengxs/ai';
+
+const client = new QWenAI();
+
+async function main() {
+  const images = await client.images.generate({
+    prompt: 'cat',
+  });
+
+  for (const image of images.data) {
+    console.log(image.url);
+  }
+}
+
+main();
 ```

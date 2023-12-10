@@ -11,7 +11,7 @@ export class Images extends APIResource {
     const client = this._client;
 
     const { headers, ...config } = options;
-    const { model = 'wanx-v1', prompt, n = 1, ...rest } = params;
+    const { model = 'wanx-v1', prompt, n = 1, cfg, ...rest } = params;
 
     const taskId = await client
       .post<any, Response>('/services/aigc/text2image/image-synthesis', {
@@ -24,6 +24,7 @@ export class Images extends APIResource {
           },
           parameters: {
             ...rest,
+            scale: cfg,
             n,
           },
         },
@@ -160,36 +161,17 @@ namespace ImageTask {
   };
 }
 
-// {
-//   "request_id":"85eaba38-0185-99d7-8d16-4d9135238846",
-//   "output":{
-//       "task_id":"86ecf553-d340-4e21-af6e-a0c6a421c010",
-//       "task_status":"SUCCEEDED",
-//       "results":[
-//           {
-//               "url":"https://dashscope-result-bj.oss-cn-beijing.aliyuncs.com/123/a1.png
-//           },
-//           {
-//               "url":"https://dashscope-result-bj.oss-cn-beijing.aliyuncs.com/123/b2.png
-//           }
-//       ],
-//       "task_metrics":{
-//           "TOTAL":2,
-//           "SUCCEEDED":2,
-//           "FAILED":0
-//       }
-//   },
-//   "usage":{
-//       "image_count":2
-//   }
-// }
-
 export type ImageModel = Images.ImageModel;
 
 export type ImageGenerateParams = Images.ImageGenerateParams;
 
 export namespace Images {
-  export type ImageModel = (string & NonNullable<unknown>) | 'wanx-v1';
+  export type ImageModel = (string & NonNullable<unknown>)
+    // 通义万相
+    | 'wanx-v1'
+    // Stable Diffusion
+    | 'stable-diffusion-v1.5'
+    | 'stable-diffusion-xl';
 
   export interface ImageGenerateParams {
     /**
@@ -237,20 +219,22 @@ export namespace Images {
      * - \<flat illustration\> 扁平插画
      * - \<auto\> 默认
      *
+     * 仅 wanx-v1 模型支持
+     *
      * @defaultValue <auto>
      */
     style?:
-      | '<photography>'
-      | '<portrait>'
-      | '<3d cartoon>'
-      | '<anime>'
-      | '<oil painting>'
-      | '<watercolor>'
-      | '<sketch>'
-      | '<chinese painting>'
-      | '<flat illustration>'
-      | '<auto>'
-      | null;
+    | '<photography>'
+    | '<portrait>'
+    | '<3d cartoon>'
+    | '<anime>'
+    | '<oil painting>'
+    | '<watercolor>'
+    | '<sketch>'
+    | '<chinese painting>'
+    | '<flat illustration>'
+    | '<auto>'
+    | null;
 
     /**
      * The number of images to generate. Must be between 1 and 4.
@@ -258,6 +242,31 @@ export namespace Images {
      * @defaultValue 1
      */
     n?: number | null;
+
+    /**
+     * The steps parameter defines the number of operations or iterations that the
+     * generator will perform during image creation. It can impact the complexity
+     * and detail of the generated image.
+     *
+     * Range: 30-50
+     *
+     * 仅 StableDiffusion 模型支持
+     *
+     * @defaultValue 40
+     */
+    steps?: number | null;
+
+    /**
+     * The cfg parameter acts as a creative control knob.
+     * You can adjust it to fine-tune the level of artistic innovation in the image.
+     * Lower values encourage faithful execution of the prompt,
+     * while higher values introduce more creative and imaginative variations.
+     *
+     * Range: 1 - 15
+     *
+     * @defaultValue 10
+     */
+    cfg?: number | null;
 
     /**
      * The seed parameter serves as the initial value for the random number generator.

@@ -253,18 +253,33 @@ export interface ChatCompletionCreateParamsStreaming
 
 export type ChatCompletionCreateParams = ChatCompletionCreateParamsNonStreaming | ChatCompletionCreateParamsStreaming;
 
+// See https://help.aliyun.com/zh/dashscope/developer-reference/model-square
 export type ChatModel =
   | (string & NonNullable<unknown>)
+  // 通义千问
   | 'qwen-turbo'
   | 'qwen-plus'
   | 'qwen-max'
   | 'qwen-max-1201'
   | 'qwen-max-longcontext'
-  | 'baichuan2-7b-chat-v1'
+  // 通义千问开源系列
+  | 'qwen-7b-chat'
+  | 'qwen-14b-chat'
+  | 'qwen-72b-chat'
   // 多模型
   | 'qwen-vl-v1'
   | 'qwen-vl-chat-v1'
-  | 'qwen-vl-plus';
+  | 'qwen-vl-plus'
+  // LLAMA2
+  | 'llama2-7b-chat-v2'
+  | 'llama2-13b-chat-v2'
+  // 百川
+  | 'baichuan-7b-v1'
+  | 'baichuan2-13b-chat-v1'
+  | 'baichuan2-7b-chat-v1'
+  // ChatGLM
+  | 'chatglm3-6b'
+  | 'chatglm-6b-v2';
 
 export namespace ChatCompletions {
   /**
