@@ -26,7 +26,7 @@ export class Completions extends APIResource {
       headers['Accept'] = 'text/event-stream';
     }
 
-    const body = Completions.buildCreateParams(params);
+    const body = this.buildCreateParams(params);
 
     const path = isMultiModal(params.model)
       ? '/services/aigc/multimodal-generation/generation'
@@ -50,13 +50,13 @@ export class Completions extends APIResource {
         controller.abort();
       });
 
-      return Completions.fromSSEResponse(body.model, response, controller);
+      return this.afterSSEResponse(body.model, response, controller);
     }
 
-    return Completions.fromResponse(body.model, await response.json());
+    return this.afterResponse(body.model, await response.json());
   }
 
-  static buildCreateParams(params: ChatCompletionCreateParams): ChatCompletions.ChatCompletionCreateParams {
+  protected buildCreateParams(params: ChatCompletionCreateParams): ChatCompletions.ChatCompletionCreateParams {
     const { model, messages, presence_penalty, ...parameters } = params;
 
     const data: ChatCompletions.ChatCompletionCreateParams = {
@@ -104,9 +104,7 @@ export class Completions extends APIResource {
     return data;
   }
 
-  static fromResponse(model: string, data: ChatCompletions.ChatCompletion): OpenAI.ChatCompletion {
-    Completions.assert(data);
-
+  protected afterResponse(model: string, data: ChatCompletions.ChatCompletion): OpenAI.ChatCompletion {
     const { output, usage } = data;
 
     const choice: OpenAI.ChatCompletion.Choice = {
@@ -143,7 +141,7 @@ export class Completions extends APIResource {
     };
   }
 
-  static fromSSEResponse(
+  protected afterSSEResponse(
     model: string,
     response: Response,
     controller: AbortController,
@@ -226,14 +224,6 @@ export class Completions extends APIResource {
     }
 
     return new Stream(iterator, controller);
-  }
-
-  static assert(
-    resp: ChatCompletions.APIErrorResponse | ChatCompletions.ChatCompletion | ChatCompletions.ChatCompletionChunk,
-  ) {
-    if ('code' in resp) {
-      throw new APIError(undefined, resp, undefined, undefined);
-    }
   }
 }
 
