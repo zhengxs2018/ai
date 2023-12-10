@@ -3,6 +3,7 @@ import { Stream } from 'openai/streaming';
 
 import { APIResource } from '../../../resource';
 import { iterMessages, SSEDecoder } from '../../../streaming';
+import { assertStatusCode } from '../../error';
 
 export class Completions extends APIResource {
   protected resources: Record<
@@ -141,7 +142,7 @@ export class Completions extends APIResource {
   }
 
   static fromResponse(model: ChatModel, data: ChatCompletions.ChatCompletion): OpenAI.ChatCompletion {
-    Completions.assert(data);
+    assertStatusCode(data);
 
     return {
       id: data.id,
@@ -262,17 +263,6 @@ export class Completions extends APIResource {
     }
 
     return new Stream(iterator, controller);
-  }
-
-  static assert(data: ChatCompletions.ChatCompletion) {
-    if (data.base_resp.status_code === 0) return;
-
-    const error = {
-      code: data.base_resp.status_code,
-      message: data.base_resp.status_msg,
-    };
-
-    throw new APIError(undefined, error, undefined, undefined);
   }
 }
 
