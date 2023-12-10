@@ -213,7 +213,14 @@ export interface ChatCompletionCreateParamsStreaming
 
 export type ChatCompletionCreateParams = ChatCompletionCreateParamsNonStreaming | ChatCompletionCreateParamsStreaming;
 
-export type ChatModel = (string & NonNullable<unknown>) | 'qwen-turbo' | 'qwen-plus' | 'qwen-max' | 'qwen-max-1201' | 'qwen-max-longcontext' | 'baichuan2-7b-chat-v1';
+export type ChatModel =
+  | (string & NonNullable<unknown>)
+  | 'qwen-turbo'
+  | 'qwen-plus'
+  | 'qwen-max'
+  | 'qwen-max-1201'
+  | 'qwen-max-longcontext'
+  | 'baichuan2-7b-chat-v1';
 
 export namespace ChatCompletions {
   /**
