@@ -1,9 +1,7 @@
 {
   "name": "@zhengxs/ai",
-  "version": "0.1.0-alpha.7",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
-  "description": "llm tools",
+  "version": "0.1.0",
+  "description": "llm sdk",
   "keywords": [
     "ai",
     "llm",
@@ -12,48 +10,55 @@
     "hunyuan",
     "minimax"
   ],
+  "type": "commonjs",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist-types/index.d.ts",
+  "sideEffects": [
+    "./dist/shims/node.cjs",
+    "./dist/shims/node.mjs"
+  ],
   "exports": {
-    ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs",
-      "types": "./dist-types/index.d.ts"
-    },
+    "./package.json": "./package.json",
     "./shims/node": {
       "import": "./dist/shims/node.mjs",
       "require": "./dist/shims/node.cjs",
       "types": "./dist-types/shims/node.d.ts"
     },
-    "./package.json": "./package.json"
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs",
+      "types": "./dist-types/index.d.ts"
+    }
   },
-  "types": "./dist-types/index.d.ts",
   "typesVersions": {
     "*": {
       "*": [
-        "./dist-types/index.d.ts",
-        "./dist-types/*"
+        "./dist-types/*",
+        "./dist-types/index.d.ts"
       ]
     }
-  },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org"
   },
   "files": [
     "dist",
     "dist-types"
   ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
   "scripts": {
     "prepare": "husky install",
     "task": "node --no-warnings -r tsconfig-paths/register -r dotenv/config -r jiti/register",
     "inspect": "node --no-warnings --inspect -r tsconfig-paths/register -r dotenv/config -r jiti/register",
-    "build": "trash dist dist-types && tsc --noEmit && pnpm lint && vite build",
+    "build": "trash dist dist && tsc --noEmit && pnpm lint && vite build",
     "lint": "eslint . --ext .ts,.cjs",
     "lint:fix": "eslint . --ext .ts,.cjs --fix --fix-type [problem,suggestion]",
     "fmt": "prettier --write \"**/*.{ts,json,,md}\" --log-level warn"
   },
-  "packageManager": "pnpm@7.0.0",
+  "packageManager": "pnpm@8.0.0",
   "optionalDependencies": {
-    "ws": ">=8.0.0"
+    "ws": "^8.14.2"
   },
   "dependencies": {
     "openai": "^4.20.1"
