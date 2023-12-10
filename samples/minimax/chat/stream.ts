@@ -1,4 +1,4 @@
-import { MinimaxAI } from '../../src';
+import { MinimaxAI } from '../../../src';
 
 const ai = new MinimaxAI();
 
