@@ -15,10 +15,12 @@ dictionaries:
   - filetypes
 words:
   - aistudio
+  - baichuan
   - chatcompletion
   - claudeai
   - deepl
   - dingtalk
+  - embo
   - erniebot
   - GPTAPI
   - hotlist
@@ -32,6 +34,7 @@ words:
   - lineart
   - llmapi
   - llms
+  - longcontext
   - moyu
   - msgtype
   - openai
