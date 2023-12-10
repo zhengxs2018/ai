@@ -46,3 +46,28 @@ async function main() {
 
 main();
 ```
+
+## 文生图
+
+目前仅支持 `wanx-v1` 模型;
+
+```js
+import { createWriteStream } from 'node:fs';
+import path from 'node:path';
+
+import { QWenAI } from '@zhengxs/ai';
+
+const client = new QWenAI();
+
+async function main() {
+  const images = await client.images.generate({
+    prompt: 'cat',
+  });
+
+  for (const image of images.data) {
+    console.log(image.url);
+  }
+}
+
+main();
+```

@@ -57,6 +57,8 @@ export class QWenAI extends APIClient {
 
   chat = new API.Chat(this);
 
+  images = new API.Images(this);
+
   protected override authHeaders() {
     return {
       Authorization: `Bearer ${this.apiKey}`,
@@ -81,6 +83,10 @@ export namespace QWenAI {
   export type ChatCompletionCreateParams = API.ChatCompletionCreateParams;
   export type ChatCompletionCreateParamsNonStreaming = API.ChatCompletionCreateParamsNonStreaming;
   export type ChatCompletionCreateParamsStreaming = API.ChatCompletionCreateParamsStreaming;
+
+  export type Images = API.Images;
+  export type ImageModel = API.ImageModel;
+  export type ImageGenerateParams = API.ImageGenerateParams;
 }
 
 export default QWenAI;

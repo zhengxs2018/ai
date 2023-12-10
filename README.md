@@ -84,6 +84,8 @@ main();
 - [x] [阿里通义千问大模型](https://tongyi.aliyun.com/)
   - [x] Chat
   - [ ] Embeddings
+  - [ ] Images
+    - [x] generate
 - [x] [讯飞星火认知大模型](https://xinghuo.xfyun.cn/)
   - [x] Chat
   - [ ] ~~Embeddings~~ 未获得资格
