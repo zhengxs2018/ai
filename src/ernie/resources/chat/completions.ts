@@ -178,6 +178,10 @@ export class Completions extends APIResource {
           choices: [choice],
           object: 'chat.completion.chunk',
           created: parseInt(data.created, 10),
+          // openai-node 上 已经有讨论添加 usage 的问题
+          // 文心一言是有提供的，这里主要是为了向前兼容
+          // @ts-expect-error
+          usage: data.usage,
         };
       }
     }

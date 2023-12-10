@@ -28,7 +28,10 @@ export default defineConfig({
     copyPublicDir: false,
     reportCompressedSize: false,
     lib: {
-      entry: ['src/index.ts'],
+      entry: {
+        index: './src/index.ts',
+        'shims/node': './src/shims/node.ts',
+      },
     },
     rollupOptions: {
       output: [

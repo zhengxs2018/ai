@@ -4,7 +4,12 @@
 
 > 开发中
 
-集成 文心一言，通义千问 等国内大模型 API，并且适配为 OpenAI 的输入与输出。
+集成 **文心一言**，**通义千问** 等国内大模型的 API，并适配为 OpenAI 的输入与输出。
+
+## 特性
+
+- 支持多种大模型的调用
+- 适配 OpenAI 的输入与输出
 
 ## 安装
 
@@ -17,19 +22,17 @@ $ yarn add @zhengxs/ai
 
 ## 使用
 
-### 文心一言
-
 在这里获取你的 [accessToken](https://aistudio.baidu.com/index/accessToken) 值。
 
 ```ts
 import { ErnieAI } from '@zhengxs/ai';
 
-const ai = new ErnieAI({
+const client = new ErnieAI({
   apiKey: 'My API Key', // defaults to process.env["EB_API_KEY"]
 });
 
 async function main() {
-  const chatCompletion = await ai.chat.completions.create({
+  const chatCompletion = await client.chat.completions.create({
     model: 'ernie-bot-turbo',
     messages: [{ role: 'user', content: 'Say this is a test' }],
   });
@@ -38,15 +41,15 @@ async function main() {
 main();
 ```
 
-**支持流式**
+### 支持流式
 
 ```ts
 import { ErnieAI } from '@zhengxs/ai';
 
-const ai = new ErnieAI();
+const client = new ErnieAI();
 
 async function main() {
-  const stream = await ai.chat.completions.create({
+  const stream = await client.chat.completions.create({
     model: 'ernie-bot-turbo',
     messages: [{ role: 'user', content: 'Say this is a test' }],
     stream: true,
@@ -60,44 +63,39 @@ async function main() {
 main();
 ```
 
-### 通义千问
+## 文档
 
-在这里获取你的 [apiKey](https://help.aliyun.com/zh/dashscope/developer-reference/activate-dashscope-and-create-an-api-key) 值。
+- [文心一言](./doc/ernie.md)
+- [通义千问](./doc/qwen.md)
+- [讯飞星火](./doc/spark.md)
+- [Minimax](./doc/minimax.md)
+- [ImagineArt](./doc/vyro.md)
 
-```ts
-import { QWenAI } from '@zhengxs/ai';
+## 关联项目
 
-const ai = new QWenAI({
-  apiKey: 'My API Key', // defaults to process.env["QWEN_API_KEY"]
-});
-
-async function main() {
-  const chatCompletion = await ai.chat.completions.create({
-    model: 'qwen-turbo',
-    messages: [{ role: 'user', content: 'Say this is a test' }],
-  });
-}
-
-main();
-```
+- [wechaty-plugin-assistant](https://github.com/zhengxs2018/wechaty-plugin-assistant) 基于 wechaty 的插件，帮助开发者快速实现一个智能对话机器人。
 
 ## 待办
 
 - [x] 百度文心一言大模型 [百度飞桨分发](https://aistudio.baidu.com/cooperate/yiyan)
-  - [x] ChatCompletion
-  - [x] Embedding
+  - [x] Chat
+  - [x] Embeddings
+  - [ ] ~~Images~~ 飞浆平台不支持
 - [x] [阿里通义千问大模型](https://tongyi.aliyun.com/)
-  - [x] ChatCompletion
-  - [ ] Embedding
+  - [x] Chat
+  - [ ] Embeddings
 - [x] [讯飞星火认知大模型](https://xinghuo.xfyun.cn/)
-  - [x] ChatCompletion
-  - [ ] Embedding
-  - [ ] Images
+  - [x] Chat
+  - [ ] ~~Embeddings~~ 未获得资格
+  - [ ] ~~Images~~ 未获得资格
 - [x] [腾讯混元大模型](https://hunyuan.tencent.com/)
-  - [x] ChatCompletion
+  - [x] Chat
 - [x] [Minimax](https://api.minimax.chat/)
-  - [x] ChatCompletion
-  - [x] Embedding
+  - [x] Chat
+  - [x] Embeddings
+  - [ ] Audio
+  - [ ] Files
+  - [ ] Retrieval（知识库检索）
 - [x] [ImagineArt](https://platform.imagine.art/api-reference)
   - [x] Images
     - [ ] createVariation
