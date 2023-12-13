@@ -20,6 +20,21 @@
 
 </div>
 
+<details>
+<summary><kbd>目录树</kbd></summary>
+
+#### TOC
+
+- [✨ 功能特性](#-功能特性)
+- [📖 使用文档](#-使用文档)
+- [📦 安装](#-安装)
+- [🔗 更多工具](#-更多工具)
+- [🤝 参与贡献](#-参与贡献)
+
+<br/>
+
+</details>
+
 ## ✨ 功能特性
 
 - 🚀 **快速开始**: 简单易用，只需一次学习，即可快速接入各种大模型。
@@ -27,7 +42,13 @@
 - 💎 **体验友好**: 无需深入学习，只需提供必要的 API Key，剩下的交给 SDK 处理。
 - 🔌 **完美适配**: 适配 OpenAI 的输入与输出格式，确保与其他模型的对话无缝对接。
 
-## 📖 文档
+<div align="right">
+
+[![][back-to-top]](#readme-top)
+
+</div>
+
+## 📖 使用文档
 
 - [文心一言](./doc/ernie.md)
 - [通义千问](./doc/qwen.md)
@@ -36,12 +57,18 @@
 - [Minimax](./doc/minimax.md)
 - [ImagineArt](./doc/vyro.md)
 
+<div align="right">
+
+[![][back-to-top]](#readme-top)
+
+</div>
+
 ## 📦 安装
 
-To install `@zhengxs/ai/`, run the following command:
+要安装 `@zhengxs/ai`，请运行以下命令:
 
 ```bash
-$ pnpm install @zhengxs/ai/
+$ pnpm install @zhengxs/ai
 ```
 
 <div align="right">
@@ -95,13 +122,13 @@ async function main() {
 main();
 ```
 
-## ⌨️ Local Development
+## ⌨️ 本地开发
 
-You can use Github Codespaces for online development:
+可以使用 GitHub Codespaces 进行在线开发：
 
 [![][github-codespace-shield]][github-codespace-link]
 
-Or clone it for local development:
+或者使用以下命令进行本地开发：
 
 ```bash
 $ git clone https://github.com/zhengxs2018/ai.git
@@ -116,23 +143,9 @@ $ pnpm dev
 
 </div>
 
-## 🔗 Links
-
-### More Products
+## 🔗 更多工具
 
 - **[🤖 wechaty-plugin-assistant](https://github.com/zhengxs2018/wechaty-plugin-assistant)** - 只需三步，就可以快速实现一个智能对话机器人。
-
-### Thanks
-
-- [chatgpt-api](https://github.com/transitive-bullshit/chatgpt-api)
-- [commander](https://github.com/tj/commander.js)
-- [wechaty](https://github.com/wechaty/wechaty)
-- [koa.js](https://github.com/koajs/koa)
-- [koa-session](https://github.com/koajs/session)
-- [openai-proxy](https://github.com/UNICKCHENG/openai-proxy)
-- And more
-
-以上排名不分先后.
 
 <div align="right">
 
@@ -140,9 +153,9 @@ $ pnpm dev
 
 </div>
 
-## 🤝 Contributing
+## 🤝 参与贡献
 
-Contributions of all types are more than welcome, if you are interested in contributing code, feel free to check out our GitHub [Issues][github-issues-link] to get stuck in to show us what you’re made of.
+我们非常欢迎各种形式的贡献。如果你对贡献代码感兴趣，可以查看我们的 GitHub [Issues][github-issues-link] 大展身手，向我们展示你的奇思妙想。
 
 [![][pr-welcome-shield]][pr-welcome-link]
 
