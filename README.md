@@ -1,26 +1,61 @@
-# @zhengxs/ai
+<div align="center"><a name="readme-top"></a>
 
-[![Typescript](https://img.shields.io/badge/lang-typescript-informational?style=flat-square)](https://www.typescriptlang.org)[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)[![npm package](https://img.shields.io/npm/v/@zhengxs/ai.svg?style=flat-square)](https://www.npmjs.com/package/@zhengxs/ai)[![npm downloads](https://img.shields.io/npm/dt/@zhengxs/ai.svg?style=flat-square)](https://www.npmjs.com/package/@zhengxs/ai)![License](https://img.shields.io/npm/l/@zhengxs/ai.svg?style=flat-square)
+<h1>AI SDK</h1>
 
-> 开发中
+集成 百度文心一言，阿里通义千问，腾讯混元助手 和 讯飞星火认知 等国内大模型的 API，并且适配 OpenAI 的输入与输出。
 
-集成 **文心一言**，**通义千问** 等国内大模型的 API，并适配为 OpenAI 的输入与输出。
+[![][npm-types-shield]][npm-types-link]
+[![][npm-release-shield]][npm-release-link]
+[![][npm-downloads-shield]][npm-downloads-link]
+[![][github-releasedate-shield]][github-releasedate-link]<br/>
+[![][github-contributors-shield]][github-contributors-link]
+[![][github-forks-shield]][github-forks-link]
+[![][github-stars-shield]][github-stars-link]
+[![][github-issues-shield]][github-issues-link]
+[![][github-license-shield]][github-license-link]
 
-## 特性
+[Report Bug][github-issues-link] · [Request Feature][github-issues-link]
 
-- 支持多种大模型的调用
-- 适配 OpenAI 的输入与输出
+![](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
-## 安装
+</div>
 
-```sh
-$ npm install --save @zhengxs/ai
+## ✨ 功能特性
 
-# or
-$ yarn add @zhengxs/ai
+- 🚀 **快速开始**: 使用简单，学习一次，就可以快速接入各种大模型
+- 💎 **体验友好**: 无需过多学习，只要你提供必要的 API Key，剩下的交给 SDK 处理。
+- ➿ **完美适配**: 除非模型本身不支持，其他与 OpenAI 保持一致的输入与输出。
+
+<div align="right">
+
+[![][back-to-top]](#readme-top)
+
+</div>
+
+## 📖 文档
+
+- [文心一言](./doc/ernie.md)
+- [通义千问](./doc/qwen.md)
+- [讯飞星火](./doc/spark.md)
+- [混元助手](./doc/hunyuan.md)
+- [Minimax](./doc/minimax.md)
+- [ImagineArt](./doc/vyro.md)
+
+## 📦 安装
+
+To install `@zhengxs/ai/`, run the following command:
+
+```bash
+$ pnpm install @zhengxs/ai/
 ```
 
-## 使用
+<div align="right">
+
+[![][back-to-top]](#readme-top)
+
+</div>
+
+## 👋 使用
 
 在这里获取你的 [accessToken](https://aistudio.baidu.com/index/accessToken) 值。
 
@@ -43,6 +78,8 @@ main();
 
 ### 支持流式
 
+使用与 OpenAI 的 SDK 完全一致。
+
 ```ts
 import { ErnieAI } from '@zhengxs/ai';
 
@@ -63,56 +100,115 @@ async function main() {
 main();
 ```
 
-## 文档
+## ⌨️ Local Development
 
-- [文心一言](./doc/ernie.md)
-- [通义千问](./doc/qwen.md)
-- [讯飞星火](./doc/spark.md)
-- [混元助手](./doc/hunyuan.md)
-- [Minimax](./doc/minimax.md)
-- [ImagineArt](./doc/vyro.md)
+You can use Github Codespaces for online development:
 
-## 关联项目
+[![][github-codespace-shield]][github-codespace-link]
 
-- [wechaty-plugin-assistant](https://github.com/zhengxs2018/wechaty-plugin-assistant) 基于 wechaty 的插件，帮助开发者快速实现一个智能对话机器人。
+Or clone it for local development:
 
-## 待办
+```bash
+$ git clone https://github.com/zhengxs2018/ai.git
+$ cd ai
+$ pnpm install
+$ pnpm dev
+```
 
-- [x] [百度文心一言大模型](https://aistudio.baidu.com/cooperate/yiyan) (飞桨平台分发)
-  - [x] Chat
-  - [x] Embeddings
-  - [ ] ~~Images~~ 飞浆平台不支持
-- [x] [阿里通义千问大模型](https://tongyi.aliyun.com/)
-  - [x] Chat 支持 [通义千问 VL](https://help.aliyun.com/zh/dashscope/developer-reference/qwen-vl-plus) 模型
-  - [x] Embeddings
-  - [ ] ~~Audio~~ 等 [文档](https://help.aliyun.com/zh/dashscope/developer-reference/sambert-speech-synthesis) 的请求地址补全后再尝试
-  - [ ] Images
-    - [x] generate
-- [x] [讯飞星火认知大模型](https://xinghuo.xfyun.cn/)
-  - [x] Chat
-  - [ ] ~~Embeddings~~ 未获得资格
-  - [ ] ~~Images~~ 未获得资格
-- [x] [腾讯混元助手大模型](https://hunyuan.tencent.com/)
-  - [x] Chat
-- [x] [Minimax](https://api.minimax.chat/)
-  - [x] Chat
-  - [x] Embeddings
-  - [ ] Audio
-    - [x] speech.create
-  - [ ] Files
-  - [ ] Retrieval（知识库检索）
-- [x] [ImagineArt](https://platform.imagine.art/api-reference)
-  - [x] Images
-    - [ ] createVariation
-    - [x] edit
-    - [x] generate
-    - [x] upscale
-    - [ ] restoration
+<div align="right">
 
-## License
+[![][back-to-top]](#readme-top)
 
-MIT
+</div>
 
-## 访问量： 
-![](https://profile-counter.glitch.me/github-zhengxs2018-ai/count.svg)
+## 🔗 Links
 
+### More Products
+
+- **[🤖 wechaty-plugin-assistant](https://github.com/zhengxs2018/wechaty-plugin-assistant)** - 基于 wechaty 的聊天助手插件，只需三步，就可以快速实现一个智能对话机器人。
+
+### Thanks
+
+- [chatgpt-api](https://github.com/transitive-bullshit/chatgpt-api)
+- [commander](https://github.com/tj/commander.js)
+- [wechaty](https://github.com/wechaty/wechaty)
+- [koa.js](https://github.com/koajs/koa)
+- [koa-session](https://github.com/koajs/session)
+- [openai-proxy](https://github.com/UNICKCHENG/openai-proxy)
+- And more
+
+以上排名不分先后.
+
+<div align="right">
+
+[![][back-to-top]](#readme-top)
+
+</div>
+
+## 🤝 Contributing
+
+Contributions of all types are more than welcome, if you are interested in contributing code, feel free to check out our GitHub [Issues][github-issues-link] to get stuck in to show us what you’re made of.
+
+[![][pr-welcome-shield]][pr-welcome-link]
+
+[![][github-contrib-shield]][github-contrib-link]
+
+<div align="right">
+
+[![][back-to-top]](#readme-top)
+
+</div>
+
+## 🕘 Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=zhengxs2018/ai&type=Date)](https://star-history.com/#zhengxs2018/ai&Date)
+
+<div align="right">
+
+[![][back-to-top]](#readme-top)
+
+</div>
+
+---
+
+#### 📝 License
+
+Copyright © 2023 [zhengxs2018][profile-link]. <br />
+This project is [MIT](./LICENSE) licensed.
+
+<div align="right">
+
+[![][back-to-top]](#readme-top)
+
+</div>
+
+[profile-link]: https://github.com/zhengxs2018
+[back-to-top]: https://img.shields.io/badge/-BACK_TO_TOP-black?style=flat-square
+[aliyun-dashscope-model-list]: https://help.aliyun.com/zh/dashscope/developer-reference/model-square/
+[npm-release-shield]: https://img.shields.io/npm/v/@zhengxs/ai?color=369eff&labelColor=black&logo=npm&logoColor=white&style=flat-square
+[npm-release-link]: https://www.npmjs.com/package/@zhengxs/ai
+[npm-downloads-shield]: https://img.shields.io/npm/dt/@zhengxs/ai?labelColor=black&style=flat-square
+[npm-downloads-link]: https://www.npmjs.com/package/@zhengxs/ai
+[npm-types-shield]: https://img.shields.io/npm/types/@zhengxs/ai?labelColor=black&style=flat-square
+[npm-types-link]: https://www.npmjs.com/package/@zhengxs/ai
+[github-issues-link]: https://github.com/zhengxs2018/ai/issues
+[pr-welcome-shield]: https://img.shields.io/badge/%F0%9F%A4%AF%20PR%20WELCOME-%E2%86%92-ffcb47?labelColor=black&style=for-the-badge
+[pr-welcome-link]: https://github.com/zhengxs2018/ai/pulls
+[github-contrib-shield]: https://contrib.rocks/image?repo=zhengxs2018%2Fai
+[github-contrib-link]: https://github.com/zhengxs2018/ai/graphs/contributors
+[github-codespace-shield]: https://github.com/codespaces/badge.svg
+[github-codespace-link]: https://codespaces.new/zhengxs2018/ai
+[npm-release-shield]: https://img.shields.io/npm/v/@zhengxs/ai?color=369eff&labelColor=black&logo=npm&logoColor=white&style=flat-square
+[npm-release-link]: https://www.npmjs.com/package/@zhengxs/ai
+[github-releasedate-shield]: https://img.shields.io/github/release-date/zhengxs2018/ai?labelColor=black&style=flat-square
+[github-releasedate-link]: https://github.com/zhengxs2018/ai/releases
+[github-contributors-shield]: https://img.shields.io/github/contributors/zhengxs2018/ai?color=c4f042&labelColor=black&style=flat-square
+[github-contributors-link]: https://github.com/zhengxs2018/ai/graphs/contributors
+[github-forks-shield]: https://img.shields.io/github/forks/zhengxs2018/ai?color=8ae8ff&labelColor=black&style=flat-square
+[github-forks-link]: https://github.com/zhengxs2018/ai/network/members
+[github-stars-shield]: https://img.shields.io/github/stars/zhengxs2018/ai?color=ffcb47&labelColor=black&style=flat-square
+[github-stars-link]: https://github.com/zhengxs2018/ai/network/stargazers
+[github-issues-shield]: https://img.shields.io/github/issues/zhengxs2018/ai?color=ff80eb&labelColor=black&style=flat-square
+[github-issues-link]: https://github.com/zhengxs2018/ai/issues
+[github-license-shield]: https://img.shields.io/github/license/zhengxs2018/ai?color=white&labelColor=black&style=flat-square
+[github-license-link]: https://github.com/zhengxs2018/ai/blob/main/LICENSE
