@@ -26,12 +26,6 @@
 - 💎 **体验友好**: 无需过多学习，只要你提供必要的 API Key，剩下的交给 SDK 处理。
 - ➿ **完美适配**: 除非模型本身不支持，其他与 OpenAI 保持一致的输入与输出。
 
-<div align="right">
-
-[![][back-to-top]](#readme-top)
-
-</div>
-
 ## 📖 文档
 
 - [文心一言](./doc/ernie.md)
@@ -125,7 +119,7 @@ $ pnpm dev
 
 ### More Products
 
-- **[🤖 wechaty-plugin-assistant](https://github.com/zhengxs2018/wechaty-plugin-assistant)** - 基于 wechaty 的聊天助手插件，只需三步，就可以快速实现一个智能对话机器人。
+- **[🤖 wechaty-plugin-assistant](https://github.com/zhengxs2018/wechaty-plugin-assistant)** - 只需三步，就可以快速实现一个智能对话机器人。
 
 ### Thanks
 
