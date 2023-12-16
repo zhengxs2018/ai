@@ -1,9 +1,9 @@
 import { APIClient } from 'openai/core';
 
-export class APIResource {
-  protected _client: APIClient;
+export class APIResource<Client extends APIClient = APIClient> {
+  protected _client: Client;
 
-  constructor(client: APIClient) {
+  constructor(client: Client) {
     this._client = client;
   }
 }

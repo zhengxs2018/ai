@@ -1,6 +1,7 @@
 import OpenAI from 'openai';
 
 import ErnieAI, { ErnieAIOptions } from './ernie';
+import GeminiAI, { GeminiAIOptions } from './gemini';
 import HunYuanAI, { HunYuanAIOptions } from './hunyuan';
 import MinimaxAI, { MinimaxAIOptions } from './minimax';
 import QWenAI, { QWenAIOptions } from './qwen';
@@ -10,6 +11,8 @@ import VYroAI, { VYroAIOptions } from './vyro';
 export {
   ErnieAI,
   type ErnieAIOptions,
+  GeminiAI,
+  type GeminiAIOptions,
   HunYuanAI,
   type HunYuanAIOptions,
   MinimaxAI,
