@@ -49,7 +49,7 @@ export class Images extends APIResource {
       })
       .then<ImageTaskQueryResponse>(response => response.json());
 
-    const { task_status } = response.output;
+    const { task_status, message } = response.output;
 
     if (task_status === 'PENDING' || task_status === 'RUNNING') {
       return new Promise<ImageTask.Image[]>(resolve => {
@@ -62,7 +62,7 @@ export class Images extends APIResource {
     }
 
     if (task_status === 'FAILED') {
-      throw new OpenAIError((response as ImageTaskFailedResponse).message);
+      throw new OpenAIError(message);
     }
 
     throw new OpenAIError('Unknown task status');
@@ -74,6 +74,8 @@ type ImageCreateTaskResponse = {
   output: {
     task_id: string;
     task_status: ImageTask.Status;
+    code: string
+    message: string
   };
 };
 
@@ -92,6 +94,8 @@ type ImageTaskPendingResponse = {
     task_metrics: ImageTask.Metrics;
     submit_time: string;
     scheduled_time: string;
+    code: string
+    message: string
   };
 };
 
@@ -103,6 +107,8 @@ type ImageTaskRunningResponse = {
     task_metrics: ImageTask.Metrics;
     submit_time: string;
     scheduled_time: string;
+    code: string
+    message: string
   };
 };
 
@@ -116,6 +122,8 @@ type ImageTaskFinishedResponse = {
     submit_time: string;
     scheduled_time: string;
     end_time: string;
+    code: string
+    message: string
   };
   usage: {
     image_count: number;
@@ -131,6 +139,8 @@ type ImageTaskFailedResponse = {
     task_metrics: ImageTask.Metrics;
     submit_time: string;
     scheduled_time: string;
+    code: string
+    message: string
   };
 };
 
@@ -139,6 +149,8 @@ type ImageTaskUnknownResponse = {
   output: {
     task_status: 'UNKNOWN';
     task_metrics: ImageTask.Metrics;
+    code: string
+    message: string
   };
 };
 
