@@ -1,5 +1,8 @@
 {
-  "*.ts": "eslint",
-  "*.json": "prettier --check",
-  "*.md": "prettier --check"
+  "*.ts": [
+    "prettier --check"
+  ],
+  "*.md": [
+    "prettier --check"
+  ]
 }

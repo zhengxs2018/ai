@@ -36,7 +36,7 @@ export class QWenAI extends APIClient {
   constructor(options: QWenAIOptions = {}) {
     const {
       apiKey = process.env.QWEN_API_KEY || '',
-      baseURL = 'https://dashscope.aliyuncs.com/api/v1',
+      baseURL = 'https://dashscope.aliyuncs.com/api/v1/',
       timeout = 30000,
       fetch = globalThis.fetch,
       httpAgent = undefined,
@@ -57,6 +57,7 @@ export class QWenAI extends APIClient {
   }
 
   chat = new API.Chat(this);
+  completions = new API.Completions(this);
 
   embeddings = new API.Embeddings(this);
 
@@ -90,17 +91,23 @@ export class QWenAI extends APIClient {
 }
 
 export namespace QWenAI {
-  export type Chat = API.Chat;
-  export type ChatModel = API.ChatModel;
-  export type ChatCompletionCreateParams = API.ChatCompletionCreateParams;
-  export type ChatCompletionCreateParamsNonStreaming = API.ChatCompletionCreateParamsNonStreaming;
-  export type ChatCompletionCreateParamsStreaming = API.ChatCompletionCreateParamsStreaming;
+  export import Chat = API.Chat;
+  export import ChatModel = API.ChatModel;
+  export import ChatCompletionCreateParams = API.ChatCompletionCreateParams;
+  export import ChatCompletionCreateParamsNonStreaming = API.ChatCompletionCreateParamsNonStreaming;
+  export import ChatCompletionCreateParamsStreaming = API.ChatCompletionCreateParamsStreaming;
 
-  export type Embeddings = API.Embeddings;
+  export import Completions = API.Completions;
+  export import CompletionModel = API.CompletionModel;
+  export type CompletionCreateParams = API.CompletionCreateParams;
+  export type CompletionCreateParamsStreaming = API.CompletionCreateParamsStreaming;
+  export type CompletionCreateParamsNonStreaming = API.CompletionCreateParamsNonStreaming;
+
+  export import Embeddings = API.Embeddings;
   export type EmbeddingModel = API.EmbeddingModel;
   export type EmbeddingCreateParams = API.EmbeddingCreateParams;
 
-  export type Images = API.Images;
+  export import Images = API.Images;
   export type ImageModel = API.ImageModel;
   export type ImageGenerateParams = API.ImageGenerateParams;
 }

@@ -32,6 +32,7 @@ temp/
 .cache
 *.tsbuildinfo
 *.sqlite
+package/
 
 yarn.lock
 package-lock.json

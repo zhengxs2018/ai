@@ -43,7 +43,6 @@ export class Completions extends APIResource {
 
     const response: Response = await this._client.post(path, {
       ...options,
-      // @ts-expect-error 类型冲突？
       body,
       headers: {
         ...options?.headers,
@@ -114,6 +113,7 @@ export class Completions extends APIResource {
         role: 'assistant',
         content: message.messages.content,
       },
+      logprobs: null,
       finish_reason: message.finish_reason,
     };
 

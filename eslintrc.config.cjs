@@ -1,5 +1,5 @@
 // @ts-check
-const { defineConfig } = require('eslint-define-config')
+const { defineConfig } = require('eslint-define-config');
 
 module.exports = defineConfig({
   root: true,
@@ -33,4 +33,5 @@ module.exports = defineConfig({
       },
     },
   ],
-})
+  ignorePatterns: ['dist'],
+});

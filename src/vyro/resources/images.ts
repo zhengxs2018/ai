@@ -42,7 +42,6 @@ export class Images extends APIResource {
 
     const response: Response = await client.post(`/imagine/${client.apiType}/generations/variations`, {
       ...options,
-      // @ts-expect-error
       body: {
         body: formData,
         [Symbol.toStringTag]: 'MultipartBody',
@@ -83,7 +82,6 @@ export class Images extends APIResource {
 
     const response: Response = await client.post(`/imagine/${client.apiType}/edits/remix`, {
       ...options,
-      // @ts-expect-error
       body: {
         body: formData,
         [Symbol.toStringTag]: 'MultipartBody',
@@ -122,7 +120,6 @@ export class Images extends APIResource {
 
     const response: Response = await client.post(`/imagine/${client.apiType}/generations`, {
       ...options,
-      // @ts-expect-error
       body: {
         body: formData,
         [Symbol.toStringTag]: 'MultipartBody',
@@ -153,7 +150,6 @@ export class Images extends APIResource {
 
     const response: Response = await client.post(`/imagine/${client.apiType}/upscale`, {
       ...options,
-      // @ts-expect-error
       body: {
         body: formData,
         [Symbol.toStringTag]: 'MultipartBody',
@@ -192,7 +188,6 @@ export class Images extends APIResource {
 
     const response: Response = await client.post(`/imagine/${client.apiType}/generations/variations`, {
       ...options,
-      // @ts-expect-error
       body: {
         body: formData,
         [Symbol.toStringTag]: 'MultipartBody',

@@ -18,6 +18,8 @@ words:
   - aistudio
   - baichuan
   - chatcompletion
+  - chatglm
+  - dashscope
   - embo
   - erniebot
   - hunyuan
@@ -25,6 +27,7 @@ words:
   - inpainted
   - jiti
   - lineart
+  - logprobs
   - longcontext
   - openai
   - openpose
