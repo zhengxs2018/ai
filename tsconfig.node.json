@@ -11,6 +11,6 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true
   },
-  "include": ["vite.config.ts", "package.json"],
+  "include": ["vite.config.mts", "package.json"],
   "exclude": ["node_modules"]
 }

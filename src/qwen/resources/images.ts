@@ -74,8 +74,8 @@ type ImageCreateTaskResponse = {
   output: {
     task_id: string;
     task_status: ImageTask.Status;
-    code: string
-    message: string
+    code: string;
+    message: string;
   };
 };
 
@@ -94,8 +94,8 @@ type ImageTaskPendingResponse = {
     task_metrics: ImageTask.Metrics;
     submit_time: string;
     scheduled_time: string;
-    code: string
-    message: string
+    code: string;
+    message: string;
   };
 };
 
@@ -107,8 +107,8 @@ type ImageTaskRunningResponse = {
     task_metrics: ImageTask.Metrics;
     submit_time: string;
     scheduled_time: string;
-    code: string
-    message: string
+    code: string;
+    message: string;
   };
 };
 
@@ -122,8 +122,8 @@ type ImageTaskFinishedResponse = {
     submit_time: string;
     scheduled_time: string;
     end_time: string;
-    code: string
-    message: string
+    code: string;
+    message: string;
   };
   usage: {
     image_count: number;
@@ -139,8 +139,8 @@ type ImageTaskFailedResponse = {
     task_metrics: ImageTask.Metrics;
     submit_time: string;
     scheduled_time: string;
-    code: string
-    message: string
+    code: string;
+    message: string;
   };
 };
 
@@ -149,8 +149,8 @@ type ImageTaskUnknownResponse = {
   output: {
     task_status: 'UNKNOWN';
     task_metrics: ImageTask.Metrics;
-    code: string
-    message: string
+    code: string;
+    message: string;
   };
 };
 

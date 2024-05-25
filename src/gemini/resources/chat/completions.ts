@@ -122,6 +122,7 @@ export class Completions extends APIResource {
           role: 'assistant',
           content: part.text!,
         },
+        logprobs: null,
         finish_reason: 'stop',
       };
 

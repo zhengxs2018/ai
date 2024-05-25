@@ -4,13 +4,15 @@ const qwenai = new QWenAI();
 
 async function main() {
   const stream = await qwenai.chat.completions.create({
-    stream: true,
-    model: 'qwen-max',
+    model: 'llama2-7b-chat-v2',
     messages: [{ role: 'user', content: 'Say this is a test' }],
+    stream: true,
   });
 
   for await (const chunk of stream) {
-    console.log(chunk.choices[0]?.delta?.content || '');
+    console.dir(chunk, {
+      depth: 5,
+    });
   }
 }
 

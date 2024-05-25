@@ -157,6 +157,7 @@ export class Completions extends APIResource {
               role: 'assistant',
               content: choice.messages[0].text,
             },
+            logprobs: null,
             finish_reason,
           };
         }
@@ -167,6 +168,7 @@ export class Completions extends APIResource {
             role: 'assistant',
             content: choice.text,
           },
+          logprobs: null,
           finish_reason,
         };
       }),
