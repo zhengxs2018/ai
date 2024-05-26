@@ -28,6 +28,11 @@ export interface QWenAIOptions {
   defaultQuery?: DefaultQuery;
 }
 
+/**
+ * 基于阿里云 [DashScope 灵积模型服务](https://help.aliyun.com/zh/dashscope/product-overview/product-introduction) 的接口封装
+ *
+ * @deprecated 请重点关注阿里云的 [OpenAI接口兼容](https://help.aliyun.com/zh/dashscope/developer-reference/compatibility-of-openai-with-dashscope/) 计划。
+ */
 export class QWenAI extends APIClient {
   protected apiKey: string;
 

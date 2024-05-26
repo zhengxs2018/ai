@@ -32,10 +32,12 @@ words:
   - openai
   - openpose
   - permissioning
+  - postpublish
   - qwen
   - qwenai
   - sdxl
   - trivago
+  - tsdoc
   - vyro
   - wanx
   - wechat
