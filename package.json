@@ -10,6 +10,16 @@
     "hunyuan",
     "minimax"
   ],
+  "author": "zhengxs2018 <zhengxs2018@gmail.com>",
+  "homepage": "https://github.com/zhengxs2018/ai#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zhengxs2018/ai"
+  },
+  "bugs": {
+    "url": "https://github.com/zhengxs2018/ai/issues"
+  },
+  "license": "MIT",
   "type": "commonjs",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
@@ -55,13 +65,16 @@
   "scripts": {
     "prepare": "husky install",
     "task": "tsx --no-warnings -r dotenv/config",
-    "inspect": "node --no-warnings --inspect -r tsconfig-paths/register -r dotenv/config -r jiti/register",
+    "inspect": "tsx --no-warnings --inspect -r dotenv/config",
     "build": "vite build",
     "lint": "eslint src samples vite.config.mts",
     "lint:fix": "eslint src samples vite.config.mts --fix --fix-type [problem,suggestion]",
     "fmt": "prettier src samples vite.config.mts doc README.md --log-level warn",
     "prepublishOnly": "pnpm build && rm -rf ./package && clean-publish",
     "postpublish": "rm -rf ./package"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   },
   "packageManager": "pnpm@9.1.2",
   "optionalDependencies": {
@@ -85,12 +98,8 @@
     "eslint-plugin-prettier": "^5.1.3",
     "eslint-plugin-tsdoc": "^0.2.17",
     "husky": "^9.0.11",
-    "jiti": "^1.21.0",
     "lint-staged": "^15.2.4",
-    "mkdirp": "^3.0.1",
     "prettier": "^3.2.5",
-    "trash-cli": "^5.0.0",
-    "tsconfig-paths": "^4.2.0",
     "tsx": "^4.11.0",
     "typescript": "~5.4.5",
     "vite": "^5.2.11",
@@ -98,18 +107,5 @@
     "vite-plugin-dts": "^3.9.1",
     "vite-plugin-externalize-deps": "^0.8.0",
     "ws": "^8.17.0"
-  },
-  "homepage": "https://github.com/zhengxs2018/ai#readme",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/zhengxs2018/ai"
-  },
-  "bugs": {
-    "url": "https://github.com/zhengxs2018/ai/issues"
-  },
-  "author": "zhengxs2018 <zhengxs2018@gmail.com>",
-  "engines": {
-    "node": ">=18.0.0"
-  },
-  "license": "MIT"
+  }
 }

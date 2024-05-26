@@ -2,6 +2,7 @@ import type OpenAI from 'openai';
 
 import type { DashscopeChat } from './chat';
 import type { DashscopeCompletions } from './completions';
+import { DashscopeEmbeddings } from './embeddings';
 
 export namespace OpenAICompletionsCompatibility {
   export type CompletionModel = DashscopeCompletions.CompletionModel;
@@ -156,4 +157,27 @@ export namespace OpenAIChatCompatibility {
   }
 
   export type ChatCompletionCreateParams = ChatCompletionCreateParamsNonStreaming | ChatCompletionCreateParamsStreaming;
+}
+
+export namespace OpenAIEmbeddingsCompatibility {
+  export interface EmbeddingCreateParams {
+    /**
+     * 模型
+     */
+    model: ({} & string) | DashscopeEmbeddings.EmbeddingModel;
+
+    /**
+     * 输入文本
+     */
+    input: string | Array<string> | Array<number> | Array<Array<number>>;
+
+    /**
+     * 文本转换为向量后可以应用于检索、聚类、分类等下游任务，对检索这类非对称任务为了达到更好的检索效果
+     * 建议区分查询文本（query）和底库文本（document）类型,
+     * 聚类、分类等对称任务可以不用特殊指定，采用系统默认值"document"即可
+     *
+     * @defaultValue 'query'
+     */
+    type?: 'query' | 'document';
+  }
 }
