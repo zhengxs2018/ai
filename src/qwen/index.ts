@@ -85,6 +85,39 @@ export class QWenAI extends APIClient {
     return this._options.defaultQuery;
   }
 
+  async fetchWithTimeout(
+    url: RequestInfo,
+    init: RequestInit | undefined,
+    ms: number,
+    controller: AbortController,
+  ): Promise<Response> {
+    const response = await super.fetchWithTimeout(url, init, ms, controller);
+
+    if (response.ok) {
+      return response;
+    }
+
+    const contentType = response.headers.get('content-type') || '';
+    const precessedMessage = await response.text().then(text => {
+      // id:1
+      // event:error
+      // :HTTP_STATUS/429 TOO_MANY_REQUESTS
+      // data:{"code":"Throttling.AllocationQuota","message":"Free allocated quota exceeded.","request_id":"eafdde66-56b2-9997-a734-ecb6e22254f8"}
+      if (contentType.includes('text/event-stream')) {
+        const [_, message] = text.split('data:');
+        return message;
+      }
+
+      return text;
+    });
+
+    return new Response(precessedMessage, {
+      status: response.status,
+      statusText: response.statusText,
+      headers: response.headers,
+    });
+  }
+
   protected override makeStatusError(
     status: number | undefined,
     error: Record<string, any> | undefined,
