@@ -134,8 +134,10 @@ main();
 $ git clone https://github.com/zhengxs2018/ai.git
 $ cd ai
 $ pnpm install
-$ pnpm dev
+$ pnpm task <path/to/file>
 ```
+
+**注意** 可以使用 task 直接运行示例的 ts 文件，如 `pnpm task ai/samples/qwen/chat/create.ts`。
 
 <div align="right">
 
