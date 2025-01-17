@@ -127,6 +127,7 @@ main();
 可以使用 GitHub Codespaces 进行在线开发：
 
 [![][github-codespace-shield]][github-codespace-link]
+[![][open-in-codeanywhere]][open-in-codeanywhere-link]
 
 或者使用以下命令进行本地开发：
 
@@ -208,6 +209,8 @@ This project is [MIT](./LICENSE) licensed.
 [github-contrib-link]: https://github.com/zhengxs2018/ai/graphs/contributors
 [github-codespace-shield]: https://github.com/codespaces/badge.svg
 [github-codespace-link]: https://codespaces.new/zhengxs2018/ai
+[open-in-codeanywhere]: https://codeanywhere.com/img/open-in-codeanywhere-btn.svg
+[open-in-codeanywhere-link]:https://app.codeanywhere.com/#https://github.com/zhengxs2018/ai
 [npm-release-shield]: https://img.shields.io/npm/v/@zhengxs/ai?color=369eff&labelColor=black&logo=npm&logoColor=white&style=flat-square
 [npm-release-link]: https://www.npmjs.com/package/@zhengxs/ai
 [github-releasedate-shield]: https://img.shields.io/github/release-date/zhengxs2018/ai?labelColor=black&style=flat-square
